@@ -1,10 +1,11 @@
 import React from "react";
+import logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
-    <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm ">
+    <div className="flex justify-center flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm ">
       <div>
-        <img src="" className="mb-5 w-32" alt="" />
+        <img src={logo} className="mb-5 w-32" alt="" />
         <p className="w-full md:w-2/3 text-gray-600">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium
           perferendis dolores aperiam sit voluptatem. Aliquid esse voluptates
@@ -32,7 +33,9 @@ const Footer = () => {
 
       <div>
         <hr />
-        <p className="py-5 text-sm text-center ">Copyright 2025@ letsplaypro.com - All Right Reserved.</p>
+        <p className="py-5 text-sm text-center ">
+          Copyright 2025@ letsplaypro.com - All Right Reserved.
+        </p>
       </div>
     </div>
   );

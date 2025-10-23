@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import sportsData from "../assets/sportsData.js";
+import filter_arrow from "../assets/filter.png";
 import Title from "../components/Title.jsx";
 import ProductItem from "../components/ProductItem.jsx";
 
@@ -44,9 +45,9 @@ const Collection = () => {
         >
           FILTERS
           <img
-            src=""
+            src={filter_arrow}
             alt="Dropdown"
-            className={`h-3 sm:hidden ${showFilter ? "rotate-90" : ""}`}
+            className={`h-5 sm:hidden ${showFilter ? "rotate-90" : ""}`}
           />
         </p>
         <div
@@ -141,11 +142,11 @@ const Collection = () => {
             </p>
           </div>
         </div>
-
-        {/* Right SIde */}
+      </div>
+      {/* Right SIde */}
 
         <div className="flex-1">
-          <div className="flex justify-between test-base sm:text-2xl mb-4">
+          <div className="flex justify-between text-base sm:text-2xl mt-4 pb-4">
             <Title t1={"ALL"} t2={"COLLETIONS"} />
             <select
               name=""
@@ -170,7 +171,6 @@ const Collection = () => {
             ))}
           </div>
         </div>
-      </div>
     </div>
   );
 };
