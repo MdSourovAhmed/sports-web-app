@@ -140,14 +140,8 @@
 
 // export default Navbar;
 
-
-
-
-
-
-
 import React, { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.PNG";
 import searchIcon from "../assets/search.png";
 import cartIcon from "../assets/cart.png";
@@ -157,22 +151,33 @@ import closeIcon from "../assets/close.PNG";
 
 const Navbar = ({ cartCount = 0 }) => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className="flex items-center justify-between py-5 font-medium relative">
-      <img src={logo} alt="Site Logo" className="w-32" /> {/* Assumed w-32; adjust as needed */}
-      
+      <img
+        src={logo}
+        onClick={()=>navigate("/")}
+        alt="Site Logo"
+        className="w-32 cursor-pointer"
+      />{" "}
+      {/* Assumed w-32; adjust as needed */}
       {/* Desktop Nav */}
       <ul className="hidden sm:flex gap-5 text-sm text-gray-600">
         <NavLinks orientation="horizontal" />
       </ul>
-
       {/* Desktop Actions */}
       <div className="flex items-center gap-6" role="menubar">
-        <img src={searchIcon} alt="Search" className="w-5 cursor-pointer" role="button" aria-label="Open search" />
-        
+        <img
+          src={searchIcon}
+          alt="Search"
+          className="w-5 cursor-pointer"
+          role="button"
+          aria-label="Open search"
+        />
+
         <UserDropdown />
-        
+
         <Link to="/cart" className="relative" aria-label="Shopping Cart">
           <img src={cartIcon} className="w-5" alt="Cart Icon" />
           {cartCount > 0 && (
@@ -181,7 +186,7 @@ const Navbar = ({ cartCount = 0 }) => {
             </span>
           )}
         </Link>
-        
+
         {/* Mobile Menu Toggle */}
         <img
           src={menuIcon}
@@ -192,7 +197,6 @@ const Navbar = ({ cartCount = 0 }) => {
           onClick={() => setIsMobileOpen(true)}
         />
       </div>
-
       {/* Mobile Menu Overlay */}
       {isMobileOpen && (
         <div
@@ -200,7 +204,6 @@ const Navbar = ({ cartCount = 0 }) => {
           onClick={() => setIsMobileOpen(false)}
         />
       )}
-      
       {/* Mobile Menu */}
       <div
         className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50 sm:hidden ${
@@ -219,7 +222,10 @@ const Navbar = ({ cartCount = 0 }) => {
           />
         </div>
         <ul className="flex flex-col p-4 text-gray-600">
-          <NavLinks orientation="vertical" onLinkClick={() => setIsMobileOpen(false)} />
+          <NavLinks
+            orientation="vertical"
+            onLinkClick={() => setIsMobileOpen(false)}
+          />
         </ul>
       </div>
     </nav>
@@ -230,7 +236,8 @@ const Navbar = ({ cartCount = 0 }) => {
 const NavLinks = ({ orientation = "horizontal", onLinkClick }) => {
   const baseClass = "flex flex-col items-center gap-1 py-2";
   const verticalClass = "border-b border-gray-200";
-  const activeClass = "text-gray-900 after:content-[''] after:block after:w-1/2 after:h-[1.5px] after:bg-gray-900 after:rounded";
+  const activeClass =
+    "text-gray-900 after:content-[''] after:block after:w-1/2 after:h-[1.5px] after:bg-gray-900 after:rounded";
 
   const handleClick = (e) => {
     if (onLinkClick) onLinkClick();
@@ -272,7 +279,7 @@ const NavLinks = ({ orientation = "horizontal", onLinkClick }) => {
         About
       </NavLink>
       <NavLink
-        to="/contact" // Fixed: was "contract" – assuming "contact"
+        to="/contract" // Fixed: was "contract" – assuming "contact"
         className={({ isActive }) =>
           `${baseClass} ${orientation === "vertical" ? verticalClass : ""} ${
             isActive ? activeClass : ""
@@ -280,7 +287,7 @@ const NavLinks = ({ orientation = "horizontal", onLinkClick }) => {
         }
         onClick={handleClick}
       >
-        Contact
+        Contract
       </NavLink>
     </>
   );
@@ -290,15 +297,32 @@ const NavLinks = ({ orientation = "horizontal", onLinkClick }) => {
 const UserDropdown = () => {
   return (
     <div className="relative group" role="menu">
-      <img src={userIcon} alt="User Profile" className="w-5 cursor-pointer" role="button" aria-label="User menu" />
+      <img
+        src={userIcon}
+        alt="User Profile"
+        className="w-5 cursor-pointer"
+        role="button"
+        aria-label="User menu"
+      />
       <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg py-1 z-30 transition-all duration-200">
-        <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+        <Link
+          to="/profile"
+          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+          role="menuitem"
+        >
           Profile
         </Link>
-        <Link to="/orders" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+        <Link
+          to="/orders"
+          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+          role="menuitem"
+        >
           Orders
         </Link>
-        <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
+        <button
+          className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+          role="menuitem"
+        >
           Logout
         </button>
       </div>
