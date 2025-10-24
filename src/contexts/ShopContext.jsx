@@ -186,6 +186,8 @@ const ShopContextProvider = (props) => {
     );
   };
 
+  
+
   const values = {
     search,
     setSearch,
