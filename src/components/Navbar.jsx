@@ -140,7 +140,7 @@
 
 // export default Navbar;
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.PNG";
 import searchIcon from "../assets/search.png";
@@ -148,16 +148,19 @@ import cartIcon from "../assets/cart.png";
 import userIcon from "../assets/user.png";
 import menuIcon from "../assets/menu.png";
 import closeIcon from "../assets/close.PNG";
+import { ShopContext } from "../contexts/ShopContext";
 
 const Navbar = ({ cartCount = 0 }) => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const { setShowSearch } = useContext(ShopContext);
+
   const navigate = useNavigate();
 
   return (
     <nav className="flex items-center justify-between py-5 font-medium relative">
       <img
         src={logo}
-        onClick={()=>navigate("/")}
+        onClick={() => navigate("/")}
         alt="Site Logo"
         className="w-32 cursor-pointer"
       />{" "}
@@ -169,6 +172,7 @@ const Navbar = ({ cartCount = 0 }) => {
       {/* Desktop Actions */}
       <div className="flex items-center gap-6" role="menubar">
         <img
+          onClick={() => setShowSearch(true)}
           src={searchIcon}
           alt="Search"
           className="w-5 cursor-pointer"

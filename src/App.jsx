@@ -11,16 +11,17 @@ import PlaceOrder from "./pages/PlaceOrder";
 import Orders from "./pages/Orders";
 import Login from "./pages/Login";
 
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 import "./App.css";
+import SearchBar from "./components/SearchBar";
 
 function App() {
-
   return (
     <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] ">
-      <Navbar/>
+      <Navbar />
+      <SearchBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -32,7 +33,7 @@ function App() {
         <Route path="/placeOrder" element={<PlaceOrder />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

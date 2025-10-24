@@ -4,7 +4,7 @@ import Title from './Title.jsx'
 import ProductItem from "./ProductItem.jsx";
 
 const BestSeller = () => {
-  const Products = sportsData.filter((it) => it.imageCategory == "badminton");
+  const Products = sportsData.filter((it) => it.sport == "badminton");
   return (
     <div className="my-10">
       <div className="text-center text-3xl py-8 ">
