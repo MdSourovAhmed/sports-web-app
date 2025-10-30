@@ -1,30 +1,138 @@
-import React from "react";
-import sportsData from "../assets/sportsData.js";
-import Title from './Title.jsx'
+// import React from "react";
+// import sportsData from "../assets/sportsData.js";
+// import Title from './Title.jsx'
+// import ProductItem from "./ProductItem.jsx";
+
+// const BestSeller = () => {
+//   const Products = sportsData.filter((it) => it.sport == "badminton");
+//   return (
+//     <div className="my-10">
+//       <div className="text-center text-3xl py-8 ">
+//         <Title t1={'BEST'} t2={'SELLER'} />
+//         <p className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600 ">
+//           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione
+//           omnis, sint fugit facilis rem quia.
+//         </p>
+//       </div>
+//       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
+//         {Products.map((item, index) => (
+//           <ProductItem
+//             key={index}
+//             id={index}
+//             image={item.image}
+//             name={item.name}
+//             price={item.price}
+//           />
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default BestSeller;
+
+// BestSeller.jsx (Updated)
+import React, { useState, useEffect } from "react";
+import Title from "./Title.jsx";
 import ProductItem from "./ProductItem.jsx";
+import api from "../utils/api.js"; // Adjust path to your api.js
 
 const BestSeller = () => {
-  const Products = sportsData.filter((it) => it.sport == "badminton");
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const fetchBestSellers = async (page = 1) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await api.get("/bestsellers", {
+        params: {
+          page,
+          limit: 10, // Adjust as needed
+          bestSell: true, // Or 'high-low' for top sellers by price/sales if tracked
+        },
+      });
+      setProducts(response.data.products || []);
+      setTotalPages(response.data.pages || 1);
+    } catch (err) {
+      setError(err.response?.data?.message || "Failed to fetch best sellers");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchBestSellers(currentPage);
+  }, [currentPage]);
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
+
+  if (loading)
+    return <div className="text-center py-8">Loading best sellers...</div>;
+  if (error)
+    return <div className="text-center py-8 text-red-500">{error}</div>;
+
   return (
     <div className="my-10">
       <div className="text-center text-3xl py-8 ">
-        <Title t1={'BEST'} t2={'SELLER'} />
+        <Title t1={"BEST"} t2={"SELLER"} />
         <p className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600 ">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione
           omnis, sint fugit facilis rem quia.
         </p>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
-        {Products.map((item, index) => (
+        {products.map((item) => (
           <ProductItem
-            key={index}
-            id={index}
-            image={item.image}
+            key={item._id || item.sku}
+            id={item._id || item.sku}
+            image={item.images?.[0]}
             name={item.name}
             price={item.price}
           />
         ))}
       </div>
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex justify-center gap-2 mt-8">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="px-3 py-1 rounded-md border disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Previous
+          </button>
+          {[...Array(totalPages)].map((_, i) => (
+            <button
+              key={i + 1}
+              onClick={() => handlePageChange(i + 1)}
+              className={`px-3 py-1 rounded-md border ${
+                currentPage === i + 1
+                  ? "bg-blue-500 text-white"
+                  : "bg-white text-gray-600 hover:bg-gray-100"
+              }`}
+            >
+              {i + 1}
+            </button>
+          ))}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="px-3 py-1 rounded-md border disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };

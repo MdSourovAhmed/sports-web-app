@@ -1,206 +1,384 @@
-// import React, { useEffect, useState } from "react";
-// import sportsData from "../assets/sportsData.js";
-// import filter_arrow from "../assets/filter.png";
-// import Title from "../components/Title.jsx";
-// import ProductItem from "../components/ProductItem.jsx";
+// // import React, { useEffect, useState } from "react";
+// // import sportsData from "../assets/sportsData.js";
+// // import filter_arrow from "../assets/filter.png";
+// // import Title from "../components/Title.jsx";
+// // import ProductItem from "../components/ProductItem.jsx";
 
-// const Collection = () => {
-//   const Products = sportsData;
-//   const [showFilter, setShowFilter] = useState(false);
-//   const [filterProducts, setShowFilterProducts] = useState([]);
-//   const [category, setCategory] = useState([]);
-//   const [subCategory, setsubCategory] = useState([]);
+// // const Collection = () => {
+// //   const Products = sportsData;
+// //   const [showFilter, setShowFilter] = useState(false);
+// //   const [filterProducts, setShowFilterProducts] = useState([]);
+// //   const [category, setCategory] = useState([]);
+// //   const [subCategory, setsubCategory] = useState([]);
 
-//   const toggleCategory = (e) => {
-//     if (category.includes(e.target.value)) {
-//       setCategory((prev) =>
-//         prev.filter((it) => it.imageCategory !== e.target.value)
-//       );
-//     } else {
-//       setCategory((prev) => [...prev, e.target.value]);
-//     }
-//   };
+// //   const toggleCategory = (e) => {
+// //     if (category.includes(e.target.value)) {
+// //       setCategory((prev) =>
+// //         prev.filter((it) => it.imageCategory !== e.target.value)
+// //       );
+// //     } else {
+// //       setCategory((prev) => [...prev, e.target.value]);
+// //     }
+// //   };
 
-//   const toggleSubCategory = (e) => {
-//     if (subCategory.includes(e.target.value)) {
-//       setsubCategory((prev) =>
-//         prev.filter((it) => it.imageCategory !== e.target.value)
-//       );
-//     } else {
-//       setsubCategory((prev) => [...prev, e.target.value]);
-//     }
-//   };
+// //   const toggleSubCategory = (e) => {
+// //     if (subCategory.includes(e.target.value)) {
+// //       setsubCategory((prev) =>
+// //         prev.filter((it) => it.imageCategory !== e.target.value)
+// //       );
+// //     } else {
+// //       setsubCategory((prev) => [...prev, e.target.value]);
+// //     }
+// //   };
 
-//   useEffect(() => {
-//     console.log(category);
-//   }, [category]);
+// //   useEffect(() => {
+// //     console.log(category);
+// //   }, [category]);
 
-//   return (
-//     <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t">
-//       {/* Filter Option */}
-//       <div className="min-w-50">
-//         <p
-//           onClick={() => setShowFilter(!showFilter)}
-//           className="my-4 text-xl flex items-center cursor-pointer gap-2"
-//         >
-//           FILTERS
-//           <img
-//             src={filter_arrow}
-//             alt="Dropdown"
-//             className={`h-5 sm:hidden ${showFilter ? "rotate-90" : ""}`}
-//           />
-//         </p>
-//         <div
-//           className={`border border-gray-300 pl-5 py-3 mt-6 ${
-//             showFilter ? "block" : "hidden sm:block"
-//           }`}
-//         >
-//           <p className="mb-3 text-sm font-medium">CATEGORIES</p>
-//           <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
-//             <p className="flex gap-2">
-//               <input
-//                 type="checkbox"
-//                 className="w-3"
-//                 value={"cricket"}
-//                 onChange={toggleCategory}
-//               />
-//               Cricket
-//             </p>
-//             <p className="flex gap-2">
-//               <input
-//                 type="checkbox"
-//                 className="w-3"
-//                 value={"football"}
-//                 onChange={toggleCategory}
-//               />
-//               Football
-//             </p>
-//             <p className="flex gap-2">
-//               <input
-//                 type="checkbox"
-//                 className="w-3"
-//                 value={"badminton"}
-//                 onChange={toggleCategory}
-//               />
-//               Badminton
-//             </p>
-//             <p className="flex gap-2">
-//               <input
-//                 type="checkbox"
-//                 className="w-3"
-//                 value={"basketball"}
-//                 onChange={toggleCategory}
-//               />
-//               Basketball
-//             </p>
-//             <p className="flex gap-2">
-//               <input
-//                 type="checkbox"
-//                 className="w-3"
-//                 value={"tenis"}
-//                 onChange={toggleCategory}
-//               />
-//               Tenis
-//             </p>
-//           </div>
-//         </div>
+// //   return (
+// //     <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t">
+// //       {/* Filter Option */}
+// //       <div className="min-w-50">
+// //         <p
+// //           onClick={() => setShowFilter(!showFilter)}
+// //           className="my-4 text-xl flex items-center cursor-pointer gap-2"
+// //         >
+// //           FILTERS
+// //           <img
+// //             src={filter_arrow}
+// //             alt="Dropdown"
+// //             className={`h-5 sm:hidden ${showFilter ? "rotate-90" : ""}`}
+// //           />
+// //         </p>
+// //         <div
+// //           className={`border border-gray-300 pl-5 py-3 mt-6 ${
+// //             showFilter ? "block" : "hidden sm:block"
+// //           }`}
+// //         >
+// //           <p className="mb-3 text-sm font-medium">CATEGORIES</p>
+// //           <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
+// //             <p className="flex gap-2">
+// //               <input
+// //                 type="checkbox"
+// //                 className="w-3"
+// //                 value={"cricket"}
+// //                 onChange={toggleCategory}
+// //               />
+// //               Cricket
+// //             </p>
+// //             <p className="flex gap-2">
+// //               <input
+// //                 type="checkbox"
+// //                 className="w-3"
+// //                 value={"football"}
+// //                 onChange={toggleCategory}
+// //               />
+// //               Football
+// //             </p>
+// //             <p className="flex gap-2">
+// //               <input
+// //                 type="checkbox"
+// //                 className="w-3"
+// //                 value={"badminton"}
+// //                 onChange={toggleCategory}
+// //               />
+// //               Badminton
+// //             </p>
+// //             <p className="flex gap-2">
+// //               <input
+// //                 type="checkbox"
+// //                 className="w-3"
+// //                 value={"basketball"}
+// //                 onChange={toggleCategory}
+// //               />
+// //               Basketball
+// //             </p>
+// //             <p className="flex gap-2">
+// //               <input
+// //                 type="checkbox"
+// //                 className="w-3"
+// //                 value={"tenis"}
+// //                 onChange={toggleCategory}
+// //               />
+// //               Tenis
+// //             </p>
+// //           </div>
+// //         </div>
 
-//         {/* Sub Category */}
-//         <div
-//           className={`border border-gray-300 pl-5 py-3 mt-6 ${
-//             showFilter ? "block" : "hidden sm:block"
-//           }`}
-//         >
-//           <p className="mb-3 text-sm font-medium">TYPE</p>
-//           <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
-//             <p className="flex gap-2">
-//               <input
-//                 type="checkbox"
-//                 className="w-3"
-//                 value="Top"
-//                 onChange={toggleSubCategory}
-//               />
-//               Top
-//             </p>
-//             <p className="flex gap-2">
-//               <input
-//                 type="checkbox"
-//                 className="w-3"
-//                 value="Medium"
-//                 onChange={toggleSubCategory}
-//               />
-//               Medium
-//             </p>
-//             <p className="flex gap-2">
-//               <input
-//                 type="checkbox"
-//                 className="w-3"
-//                 value="Less"
-//                 onChange={toggleSubCategory}
-//               />
-//               Less
-//             </p>
-//           </div>
-//         </div>
-//       </div>
-//       {/* Right SIde */}
+// //         {/* Sub Category */}
+// //         <div
+// //           className={`border border-gray-300 pl-5 py-3 mt-6 ${
+// //             showFilter ? "block" : "hidden sm:block"
+// //           }`}
+// //         >
+// //           <p className="mb-3 text-sm font-medium">TYPE</p>
+// //           <div className="flex flex-col gap-2 text-sm font-light text-gray-700">
+// //             <p className="flex gap-2">
+// //               <input
+// //                 type="checkbox"
+// //                 className="w-3"
+// //                 value="Top"
+// //                 onChange={toggleSubCategory}
+// //               />
+// //               Top
+// //             </p>
+// //             <p className="flex gap-2">
+// //               <input
+// //                 type="checkbox"
+// //                 className="w-3"
+// //                 value="Medium"
+// //                 onChange={toggleSubCategory}
+// //               />
+// //               Medium
+// //             </p>
+// //             <p className="flex gap-2">
+// //               <input
+// //                 type="checkbox"
+// //                 className="w-3"
+// //                 value="Less"
+// //                 onChange={toggleSubCategory}
+// //               />
+// //               Less
+// //             </p>
+// //           </div>
+// //         </div>
+// //       </div>
+// //       {/* Right SIde */}
 
-//         <div className="flex-1">
-//           <div className="flex justify-between text-base sm:text-xl mt-4 mb-4">
-//             <Title t1={"ALL"} t2={"COLLETIONS"} />
-//             <select
-//               name=""
-//               className="border-2 border-gray-300 text-xs sm:text-sm px-2"
-//               id=""
-//             >
-//               <option value="relavent">Sort by: Relavent</option>
-//               <option value="low-high">Sort by: Low to High</option>
-//               <option value="high-to">Sort by: High to Low</option>
-//             </select>
-//           </div>
+// //         <div className="flex-1">
+// //           <div className="flex justify-between text-base sm:text-xl mt-4 mb-4">
+// //             <Title t1={"ALL"} t2={"COLLETIONS"} />
+// //             <select
+// //               name=""
+// //               className="border-2 border-gray-300 text-xs sm:text-sm px-2"
+// //               id=""
+// //             >
+// //               <option value="relavent">Sort by: Relavent</option>
+// //               <option value="low-high">Sort by: Low to High</option>
+// //               <option value="high-to">Sort by: High to Low</option>
+// //             </select>
+// //           </div>
 
-//           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 gap-y-6">
-//             {Products.map((item, index) => (
-//               <ProductItem
-//                 key={index}
-//                 id={index}
-//                 image={item.image}
-//                 name={item.name}
-//                 price={item.price}
-//               />
-//             ))}
-//           </div>
-//         </div>
-//     </div>
-//   );
-// };
+// //           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 gap-y-6">
+// //             {Products.map((item, index) => (
+// //               <ProductItem
+// //                 key={index}
+// //                 id={index}
+// //                 image={item.image}
+// //                 name={item.name}
+// //                 price={item.price}
+// //               />
+// //             ))}
+// //           </div>
+// //         </div>
+// //     </div>
+// //   );
+// // };
 
-// export default Collection;
+// // export default Collection;
 
+// // import React, { useMemo, useState } from "react";
+// // import sportsData from "../assets/sportsData.js";
+// // import filter_arrow from "../assets/filter.png";
+// // import Title from "../components/Title.jsx";
+// // import ProductItem from "../components/ProductItem.jsx";
+
+// // const Collection = () => {
+// //   const products = sportsData;
+// //   const [showFilter, setShowFilter] = useState(false);
+// //   const [selectedCategories, setSelectedCategories] = useState([]);
+// //   const [selectedTypes, setSelectedTypes] = useState([]);
+// //   const [sortBy, setSortBy] = useState("relevant");
+
+// //   // Hardcoded categories for now; make dynamic in future
+// //   const categories = ["general", "cricket", "football", "badminton", "basketball", "tennis"];
+
+// //   // Hardcoded types based on new products; expand as needed
+// //   const types = ["jersey", "sneakers", "trousers", "bat", "ball", "racket", "helmet", "pads", "shuttlecock"];
+
+// //   const toggleCategory = (value) => {
+// //     setSelectedCategories((prev) =>
+// //       prev.includes(value)
+// //         ? prev.filter((cat) => cat !== value)
+// //         : [...prev, value]
+// //     );
+// //   };
+
+// //   const toggleType = (value) => {
+// //     setSelectedTypes((prev) =>
+// //       prev.includes(value)
+// //         ? prev.filter((type) => type !== value)
+// //         : [...prev, value]
+// //     );
+// //   };
+
+// //   // Memoized filtered and sorted products
+// //   const filteredProducts = useMemo(() => {
+// //     let filtered = products.filter((item) => item.isActive && item.stock > 0); // Base: active and in-stock
+
+// //     if (selectedCategories.length > 0) {
+// //       filtered = filtered.filter((item) =>
+// //         selectedCategories.includes(item.imageCategory || item.sport)
+// //       );
+// //     }
+
+// //     if (selectedTypes.length > 0) {
+// //       filtered = filtered.filter((item) =>
+// //         selectedTypes.includes(item.type)
+// //       );
+// //     }
+
+// //     // Apply sorting
+// //     switch (sortBy) {
+// //       case "low-high":
+// //         return [...filtered].sort((a, b) => (a.price || 0) - (b.price || 0));
+// //       case "high-low":
+// //         return [...filtered].sort((a, b) => (b.price || 0) - (a.price || 0));
+// //       default:
+// //         return filtered; // No sort for "relevant"
+// //     }
+// //   }, [products, selectedCategories, selectedTypes, sortBy]);
+
+// //   return (
+// //     <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t border-gray-400">
+// //       {/* Filter Sidebar */}
+// //       <div className="min-w-60">
+// //         <p
+// //           onClick={() => setShowFilter(!showFilter)}
+// //           className="my-2 text-xl flex items-center cursor-pointer gap-2"
+// //         >
+// //           FILTERS
+// //           <img
+// //             src={filter_arrow}
+// //             alt="Dropdown"
+// //             className={`h-5 sm:hidden transition-transform ${showFilter ? "rotate-90" : ""}`}
+// //           />
+// //         </p>
+
+// //         {/* Categories Filter */}
+// //         <div
+// //           className={`border border-gray-300 pl-5 py-3 mt-6 ${
+// //             showFilter ? "block" : "hidden sm:block"
+// //           }`}
+// //         >
+// //           <p className="mb-3 text-sm font-medium">CATEGORIES</p>
+// //           <div className="flex flex-col gap-2 text-sm font-light text-gray-700 max-h-48 overflow-y-auto">
+// //             {categories.map((cat) => (
+// //               <label key={cat} className="flex items-center gap-2 cursor-pointer">
+// //                 <input
+// //                   type="checkbox"
+// //                   className="w-3"
+// //                   value={cat}
+// //                   checked={selectedCategories.includes(cat)}
+// //                   onChange={() => toggleCategory(cat)}
+// //                 />
+// //                 {cat.charAt(0).toUpperCase() + cat.slice(1)}
+// //               </label>
+// //             ))}
+// //           </div>
+// //         </div>
+
+// //         {/* Types Filter */}
+// //         <div
+// //           className={`border border-gray-300 pl-5 py-3 mt-6 ${
+// //             showFilter ? "block" : "hidden sm:block"
+// //           }`}
+// //         >
+// //           <p className="mb-3 text-sm font-medium">TYPE</p>
+// //           <div className="flex flex-col gap-2 text-sm font-light text-gray-700 max-h-48 overflow-y-auto">
+// //             {types.map((type) => (
+// //               <label key={type} className="flex items-center gap-2 cursor-pointer">
+// //                 <input
+// //                   type="checkbox"
+// //                   className="w-3"
+// //                   value={type}
+// //                   checked={selectedTypes.includes(type)}
+// //                   onChange={() => toggleType(type)}
+// //                 />
+// //                 {type.charAt(0).toUpperCase() + type.slice(1)}
+// //               </label>
+// //             ))}
+// //           </div>
+// //         </div>
+// //       </div>
+
+// //       {/* Products Grid */}
+// //       <div className="flex-1">
+// //         <div className="flex justify-between items-center text-base sm:text-2xl mt-4 pb-4">
+// //           <Title t1="ALL" t2="COLLECTIONS" />
+// //           <select
+// //             className="border-2 border-gray-300 text-sm px-2 py-1"
+// //             value={sortBy}
+// //             onChange={(e) => setSortBy(e.target.value)}
+// //           >
+// //             <option value="relevant">Sort by: Relevant</option>
+// //             <option value="low-high">Sort by: Low to High</option>
+// //             <option value="high-low">Sort by: High to Low</option>
+// //           </select>
+// //         </div>
+
+// //         {filteredProducts.length === 0 ? (
+// //           <p className="text-gray-500 text-center py-8">No products found matching your filters.</p>
+// //         ) : (
+// //           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
+// //             {filteredProducts.map((item, index) => (
+// //               <ProductItem
+// //                 key={item.id || item.sku || index}
+// //                 id={item.id || index}
+// //                 image={item.image || item.images?.[0]}
+// //                 name={item.name}
+// //                 price={item.price}
+// //               />
+// //             ))}
+// //           </div>
+// //         )}
+// //       </div>
+// //     </div>
+// //   );
+// // };
+
+// // export default Collection;
+
+// // import React, { useMemo, useState } from "react";
+// // import products from "../assets/products.js";
+// // import filter_arrow from "../assets/filter.png";
+// // import Title from "../components/Title.jsx";
+// // import ProductItem from "../components/ProductItem.jsx";
 
 // import React, { useMemo, useState } from "react";
-// import sportsData from "../assets/sportsData.js";
+// import products from "../assets/sportsData.js";
 // import filter_arrow from "../assets/filter.png";
 // import Title from "../components/Title.jsx";
 // import ProductItem from "../components/ProductItem.jsx";
 
 // const Collection = () => {
-//   const products = sportsData;
+//   const allProducts = products;
 //   const [showFilter, setShowFilter] = useState(false);
-//   const [selectedCategories, setSelectedCategories] = useState([]);
+//   const [selectedSports, setSelectedSports] = useState([]);
 //   const [selectedTypes, setSelectedTypes] = useState([]);
 //   const [sortBy, setSortBy] = useState("relevant");
 
-//   // Hardcoded categories for now; make dynamic in future
-//   const categories = ["general", "cricket", "football", "badminton", "basketball", "tennis"];
+//   // Dynamic unique sports and types for scalability
+//   const uniqueSports = useMemo(() => {
+//     const sports = [...new Set(allProducts.map((item) => item.sport))].sort();
+//     return sports.map((sport) => ({
+//       value: sport,
+//       label: sport.charAt(0).toUpperCase() + sport.slice(1),
+//     }));
+//   }, [allProducts]);
 
-//   // Hardcoded types based on new products; expand as needed
-//   const types = ["jersey", "sneakers", "trousers", "bat", "ball", "racket", "helmet", "pads", "shuttlecock"];
+//   const uniqueTypes = useMemo(() => {
+//     const types = [...new Set(allProducts.map((item) => item.type))].sort();
+//     return types.map((type) => ({
+//       value: type,
+//       label: type.charAt(0).toUpperCase() + type.slice(1),
+//     }));
+//   }, [allProducts]);
 
-//   const toggleCategory = (value) => {
-//     setSelectedCategories((prev) =>
+//   const toggleSport = (value) => {
+//     setSelectedSports((prev) =>
 //       prev.includes(value)
-//         ? prev.filter((cat) => cat !== value)
+//         ? prev.filter((sport) => sport !== value)
 //         : [...prev, value]
 //     );
 //   };
@@ -215,11 +393,11 @@
 
 //   // Memoized filtered and sorted products
 //   const filteredProducts = useMemo(() => {
-//     let filtered = products.filter((item) => item.isActive && item.stock > 0); // Base: active and in-stock
+//     let filtered = allProducts.filter((item) => item.stock > 0); // Base: in-stock only
 
-//     if (selectedCategories.length > 0) {
+//     if (selectedSports.length > 0) {
 //       filtered = filtered.filter((item) =>
-//         selectedCategories.includes(item.imageCategory || item.sport)
+//         selectedSports.includes(item.sport)
 //       );
 //     }
 
@@ -238,7 +416,7 @@
 //       default:
 //         return filtered; // No sort for "relevant"
 //     }
-//   }, [products, selectedCategories, selectedTypes, sortBy]);
+//   }, [allProducts, selectedSports, selectedTypes, sortBy]);
 
 //   return (
 //     <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t border-gray-400">
@@ -256,24 +434,24 @@
 //           />
 //         </p>
 
-//         {/* Categories Filter */}
+//         {/* Sports Filter */}
 //         <div
 //           className={`border border-gray-300 pl-5 py-3 mt-6 ${
 //             showFilter ? "block" : "hidden sm:block"
 //           }`}
 //         >
-//           <p className="mb-3 text-sm font-medium">CATEGORIES</p>
+//           <p className="mb-3 text-sm font-medium">SPORTS</p>
 //           <div className="flex flex-col gap-2 text-sm font-light text-gray-700 max-h-48 overflow-y-auto">
-//             {categories.map((cat) => (
-//               <label key={cat} className="flex items-center gap-2 cursor-pointer">
+//             {uniqueSports.map(({ value, label }) => (
+//               <label key={value} className="flex items-center gap-2 cursor-pointer">
 //                 <input
 //                   type="checkbox"
 //                   className="w-3"
-//                   value={cat}
-//                   checked={selectedCategories.includes(cat)}
-//                   onChange={() => toggleCategory(cat)}
+//                   value={value}
+//                   checked={selectedSports.includes(value)}
+//                   onChange={() => toggleSport(value)}
 //                 />
-//                 {cat.charAt(0).toUpperCase() + cat.slice(1)}
+//                 {label}
 //               </label>
 //             ))}
 //           </div>
@@ -287,16 +465,16 @@
 //         >
 //           <p className="mb-3 text-sm font-medium">TYPE</p>
 //           <div className="flex flex-col gap-2 text-sm font-light text-gray-700 max-h-48 overflow-y-auto">
-//             {types.map((type) => (
-//               <label key={type} className="flex items-center gap-2 cursor-pointer">
+//             {uniqueTypes.map(({ value, label }) => (
+//               <label key={value} className="flex items-center gap-2 cursor-pointer">
 //                 <input
 //                   type="checkbox"
 //                   className="w-3"
-//                   value={type}
-//                   checked={selectedTypes.includes(type)}
-//                   onChange={() => toggleType(type)}
+//                   value={value}
+//                   checked={selectedTypes.includes(value)}
+//                   onChange={() => toggleType(value)}
 //                 />
-//                 {type.charAt(0).toUpperCase() + type.slice(1)}
+//                 {label}
 //               </label>
 //             ))}
 //           </div>
@@ -322,13 +500,14 @@
 //           <p className="text-gray-500 text-center py-8">No products found matching your filters.</p>
 //         ) : (
 //           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
-//             {filteredProducts.map((item, index) => (
+//             {filteredProducts.map((item) => (
 //               <ProductItem
-//                 key={item.id || item.sku || index}
-//                 id={item.id || index}
-//                 image={item.image || item.images?.[0]}
+//                 key={item.id}
+//                 id={item.id}
+//                 image={item.images?.[0]}
 //                 name={item.name}
 //                 price={item.price}
+//                 brand={item.brand} // Optional: Pass brand if ProductItem supports it
 //               />
 //             ))}
 //           </div>
@@ -340,45 +519,28 @@
 
 // export default Collection;
 
-
-
-
-// import React, { useMemo, useState } from "react";
-// import products from "../assets/products.js";
-// import filter_arrow from "../assets/filter.png";
-// import Title from "../components/Title.jsx";
-// import ProductItem from "../components/ProductItem.jsx";
-
-
-import React, { useMemo, useState } from "react";
-import products from "../assets/sportsData.js";
+import React, { useMemo, useState, useEffect } from "react";
+import axios from "axios"; // Ensure installed: npm i axios
 import filter_arrow from "../assets/filter.png";
 import Title from "../components/Title.jsx";
 import ProductItem from "../components/ProductItem.jsx";
 
+import api from "../utils/api"; // Adjust to your backend URL
+
 const Collection = () => {
-  const allProducts = products;
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [showFilter, setShowFilter] = useState(false);
   const [selectedSports, setSelectedSports] = useState([]);
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [sortBy, setSortBy] = useState("relevant");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-  // Dynamic unique sports and types for scalability
-  const uniqueSports = useMemo(() => {
-    const sports = [...new Set(allProducts.map((item) => item.sport))].sort();
-    return sports.map((sport) => ({
-      value: sport,
-      label: sport.charAt(0).toUpperCase() + sport.slice(1),
-    }));
-  }, [allProducts]);
-
-  const uniqueTypes = useMemo(() => {
-    const types = [...new Set(allProducts.map((item) => item.type))].sort();
-    return types.map((type) => ({
-      value: type,
-      label: type.charAt(0).toUpperCase() + type.slice(1),
-    }));
-  }, [allProducts]);
+  // Dynamic unique sports and types (fetched once or from initial data; here from first fetch)
+  const [uniqueSports, setUniqueSports] = useState([]);
+  const [uniqueTypes, setUniqueTypes] = useState([]);
 
   const toggleSport = (value) => {
     setSelectedSports((prev) =>
@@ -386,6 +548,7 @@ const Collection = () => {
         ? prev.filter((sport) => sport !== value)
         : [...prev, value]
     );
+    setCurrentPage(1); // Reset to page 1 on filter change
   };
 
   const toggleType = (value) => {
@@ -394,34 +557,62 @@ const Collection = () => {
         ? prev.filter((type) => type !== value)
         : [...prev, value]
     );
+    setCurrentPage(1); // Reset to page 1 on filter change
   };
 
-  // Memoized filtered and sorted products
-  const filteredProducts = useMemo(() => {
-    let filtered = allProducts.filter((item) => item.stock > 0); // Base: in-stock only
+  const fetchProducts = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const params = {
+        page: currentPage,
+        limit: 20, // Adjust as needed
+        ...(selectedSports.length > 0 && { sport: selectedSports.join(",") }),
+        ...(selectedTypes.length > 0 && { type: selectedTypes.join(",") }),
+        ...(sortBy !== "relevant" && { sort: sortBy }),
+      };
 
-    if (selectedSports.length > 0) {
-      filtered = filtered.filter((item) =>
-        selectedSports.includes(item.sport)
-      );
-    }
+      const response = await api.get("/products", { params });
 
-    if (selectedTypes.length > 0) {
-      filtered = filtered.filter((item) =>
-        selectedTypes.includes(item.type)
-      );
-    }
+      setProducts(response.data.products || []);
+      setTotalPages(response.data.pages || 1);
 
-    // Apply sorting
-    switch (sortBy) {
-      case "low-high":
-        return [...filtered].sort((a, b) => (a.price || 0) - (b.price || 0));
-      case "high-low":
-        return [...filtered].sort((a, b) => (b.price || 0) - (a.price || 0));
-      default:
-        return filtered; // No sort for "relevant"
+      // Extract uniques for filters (on first load or cache)
+      if (uniqueSports.length === 0 || uniqueTypes.length === 0) {
+        const allSports = [
+          ...new Set(response.data.products.map((item) => item.sport)),
+        ].sort();
+        const allTypes = [
+          ...new Set(response.data.products.map((item) => item.type)),
+        ].sort();
+        setUniqueSports(
+          allSports.map((sport) => ({
+            value: sport,
+            label: sport.charAt(0).toUpperCase() + sport.slice(1),
+          }))
+        );
+        setUniqueTypes(
+          allTypes.map((type) => ({
+            value: type,
+            label: type.charAt(0).toUpperCase() + type.slice(1),
+          }))
+        );
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || "Failed to fetch products");
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
-  }, [allProducts, selectedSports, selectedTypes, sortBy]);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, [selectedSports, selectedTypes, sortBy, currentPage]);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
 
   return (
     <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t border-gray-400">
@@ -435,7 +626,9 @@ const Collection = () => {
           <img
             src={filter_arrow}
             alt="Dropdown"
-            className={`h-5 sm:hidden transition-transform ${showFilter ? "rotate-90" : ""}`}
+            className={`h-5 sm:hidden transition-transform ${
+              showFilter ? "rotate-90" : ""
+            }`}
           />
         </p>
 
@@ -448,7 +641,10 @@ const Collection = () => {
           <p className="mb-3 text-sm font-medium">SPORTS</p>
           <div className="flex flex-col gap-2 text-sm font-light text-gray-700 max-h-48 overflow-y-auto">
             {uniqueSports.map(({ value, label }) => (
-              <label key={value} className="flex items-center gap-2 cursor-pointer">
+              <label
+                key={value}
+                className="flex items-center gap-2 cursor-pointer"
+              >
                 <input
                   type="checkbox"
                   className="w-3"
@@ -471,7 +667,10 @@ const Collection = () => {
           <p className="mb-3 text-sm font-medium">TYPE</p>
           <div className="flex flex-col gap-2 text-sm font-light text-gray-700 max-h-48 overflow-y-auto">
             {uniqueTypes.map(({ value, label }) => (
-              <label key={value} className="flex items-center gap-2 cursor-pointer">
+              <label
+                key={value}
+                className="flex items-center gap-2 cursor-pointer"
+              >
                 <input
                   type="checkbox"
                   className="w-3"
@@ -501,21 +700,47 @@ const Collection = () => {
           </select>
         </div>
 
-        {filteredProducts.length === 0 ? (
-          <p className="text-gray-500 text-center py-8">No products found matching your filters.</p>
+        {loading ? (
+          <p className="text-gray-500 text-center py-8">Loading products...</p>
+        ) : error ? (
+          <p className="text-red-500 text-center py-8">{error}</p>
+        ) : products.length === 0 ? (
+          <p className="text-gray-500 text-center py-8">
+            No products found matching your filters.
+          </p>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
-            {filteredProducts.map((item) => (
-              <ProductItem
-                key={item.id}
-                id={item.id}
-                image={item.images?.[0]}
-                name={item.name}
-                price={item.price}
-                brand={item.brand} // Optional: Pass brand if ProductItem supports it
-              />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
+              {products.map((item) => (
+                <ProductItem
+                  key={item._id || item.sku}
+                  id={item._id || item.sku}
+                  image={item.images?.[0]}
+                  name={item.name}
+                  price={item.price}
+                  brand={item.brand} // Optional: Pass brand if ProductItem supports it
+                />
+              ))}
+            </div>
+            {/* Basic Pagination */}
+            {totalPages > 1 && (
+              <div className="flex justify-center gap-2 mt-8">
+                {[...Array(totalPages)].map((_, i) => (
+                  <button
+                    key={i + 1}
+                    onClick={() => handlePageChange(i + 1)}
+                    className={`px-3 py-1 rounded-md border ${
+                      currentPage === i + 1
+                        ? "bg-blue-500 text-white"
+                        : "bg-white text-gray-600 hover:bg-gray-100"
+                    }`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
