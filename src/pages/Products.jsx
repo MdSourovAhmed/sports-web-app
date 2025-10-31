@@ -532,9 +532,306 @@
 
 
 
+
+// import React, { useEffect, useState, useContext } from "react";
+// import { useParams, useNavigate } from "react-router-dom";
+// import { ShopContext } from "../contexts/ShopContext";
+// import ProductItem from "../components/ProductItem";
+// import api from "../utils/api";
+
+// const Products = () => {
+//   const { productId } = useParams();
+//   const navigate = useNavigate();
+//   const { addToCart } = useContext(ShopContext);
+
+//   const [productData, setProductData] = useState(null);
+//   const [relatedProductData, setRelatedProductData] = useState(null);
+//   const [img, setImg] = useState("");
+//   const [selectedSize, setSelectedSize] = useState("");
+//   const [addedToCart, setAddedToCart] = useState(false);
+//   const [loading, setLoading] = useState(true);
+
+//   // Fetch product data from backend
+//   const fetchData = async () => {
+//     try {
+//       const res = await api.get(`/product/${productId}`);
+//       const data = res.data.data;
+//       if (data) {
+//         setProductData(data);
+//         setImg(data.images?.[0] || data.image || "");
+//         // Default to first available size if any
+//         const firstSize =
+//           Array.isArray(data.specifications?.size) &&
+//           data.specifications.size.length > 0
+//             ? data.specifications.size[0]
+//             : "";
+//         setSelectedSize(firstSize);
+//       } else {
+//         navigate("/collection");
+//       }
+//     } catch (err) {
+//       console.error("Error fetching product:", err);
+//       navigate("/collection");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchData();
+//     const relatedProducts = async () => {
+//       //   const params = { sport: productData.sport, type: productData.type };
+//       //   const res = await api.get("/related", params);
+//       //   setrelatedProductData(res.data.data);
+//       const relatedRes = await api.get("/product/related", {
+//         params: {
+//           sport: productData.sport,
+//           type: productData.type,
+//           excludeId: productId,
+//         },
+//       });
+//       setRelatedProductData(relatedRes?.data?.products || []);
+//     };
+//     relatedProducts();
+
+//   }, [productId]);
+
+//   const handleSizeClick = (size) => {
+//     setSelectedSize(size);
+//   };
+
+//   const handleAddToCart = () => {
+//     if (!selectedSize || productData?.stock <= 0) return;
+//     // console.log('productData: ',productData);
+//     addToCart(productData, selectedSize);
+//     setAddedToCart(true);
+//     setTimeout(() => setAddedToCart(false), 2000);
+//   };
+
+//   if (loading) {
+//     return (
+//       <div className="text-center py-12 text-gray-500">Loading product...</div>
+//     );
+//   }
+
+//   if (!productData) {
+//     return (
+//       <div className="text-center py-12 text-gray-500">Product not found.</div>
+//     );
+//   }
+
+//   // Destructure safely (no default overrides)
+//   const {
+//     name,
+//     price,
+//     description,
+//     brand,
+//     sport,
+//     type,
+//     stock,
+//     averageRating,
+//     tags,
+//     specifications,
+//     images,
+//     image,
+//   } = productData;
+
+//   const productImages =
+//     Array.isArray(images) && images.length > 0
+//       ? images
+//       : [image].filter(Boolean);
+//   const sizes =
+//     Array.isArray(specifications?.size) && specifications.size.length > 0
+//       ? specifications.size
+//       : specifications?.size
+//       ? [specifications.size]
+//       : [];
+
+//   return (
+//     <div className="border-t-2 py-10 transition-opacity ease-in duration-500 opacity-100">
+//       <div className="flex lg:justify-between gap-12 sm:gap-12 flex-col sm:flex-row">
+//         {/* Image Gallery */}
+//         <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-hidden justify-between sm:justify-normal sm:w-[18.7%] w-full">
+//           {productImages.map((imge, index) => (
+//             <img
+//               key={index}
+//               onClick={() => setImg(imge)}
+//               src={imge}
+//               alt={`${name || "Product"} - view ${index + 1}`}
+//               className={`w-[14%] sm:w-[50%] cursor-pointer rounded-md mb-3 border ${
+//                 img === imge ? "border-gray-500" : "border-transparent"
+//               }`}
+//             />
+//           ))}
+//         </div>
+
+//         {/* Main Image */}
+//         <div className="w-full sm:w-[70%]">
+//           <img
+//             src={img}
+//             alt={name || "Product Image"}
+//             className="w-[full] h-auto rounded-lg shadow-sm"
+//           />
+//         </div>
+//       </div>
+
+//       {/* Product Details */}
+//       <div className="flex-1 mt-8">
+//         {/* Header Info */}
+//         <div className="flex items-start justify-between flex-wrap">
+//           <div>
+//             <h1 className="font-medium text-2xl">
+//               {name || "Unnamed Product"}
+//             </h1>
+//             <p className="mt-2 text-gray-600 flex flex-wrap items-center gap-1">
+//               {(averageRating ?? 0).toFixed(1)} / 5 Stars •{" "}
+//               {brand || "Unknown Brand"} • {sport || "General"} {type || ""}
+//             </p>
+//           </div>
+//           <p className="font-medium text-3xl text-gray-600">${price ?? 0}</p>
+//         </div>
+
+//         {/* Description */}
+//         <p className="mt-4 text-gray-600 md:w-4/5">
+//           {description || "No description available."}
+//         </p>
+
+//         {/* Stock & Tags */}
+//         <div className="mt-6 flex items-center justify-between flex-wrap gap-3">
+//           <p
+//             className={`font-medium ${
+//               stock > 0 ? "text-green-600" : "text-red-600"
+//             }`}
+//           >
+//             {stock > 0 ? `In Stock: ${stock} left` : "Out of Stock"}
+//           </p>
+//           <div className="flex gap-2 flex-wrap">
+//             {Array.isArray(tags) && tags.length > 0 ? (
+//               tags.map((tag, i) => (
+//                 <span key={i} className="px-2 py-1 bg-gray-100 text-xs rounded">
+//                   {tag}
+//                 </span>
+//               ))
+//             ) : (
+//               <span className="text-gray-400 text-sm">No tags</span>
+//             )}
+//           </div>
+//         </div>
+
+//         {/* Size Selector */}
+//         <div className="flex gap-4 my-8 flex-col">
+//           <p className="font-medium">Select Size</p>
+//           <div className="flex gap-4 flex-wrap">
+//             {sizes.length > 0 ? (
+//               sizes.map((itm, indx) => (
+//                 <button
+//                   key={indx}
+//                   onClick={() => handleSizeClick(itm)}
+//                   className={`border cursor-pointer py-2 px-4 rounded-md transition-colors ${
+//                     selectedSize === itm
+//                       ? "bg-gray-800 text-white border-gray-800"
+//                       : "bg-gray-100 hover:bg-gray-200"
+//                   }`}
+//                 >
+//                   {itm}
+//                 </button>
+//               ))
+//             ) : (
+//               <p className="text-gray-500">No size options</p>
+//             )}
+//           </div>
+//         </div>
+
+//         {/* Specifications */}
+//         {specifications && Object.keys(specifications).length > 0 && (
+//           <div className="mb-8">
+//             <p className="font-medium mb-4">Specifications</p>
+//             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+//               {Object.entries(specifications).map(([key, value]) => {
+//                 if (!value) return null;
+//                 const displayValue = Array.isArray(value)
+//                   ? value.join(", ")
+//                   : typeof value === "object"
+//                   ? JSON.stringify(value)
+//                   : value;
+//                 return (
+//                   <div key={key} className="bg-gray-50 p-3 rounded-md">
+//                     <p className="text-gray-600 capitalize">
+//                       {key.replace(/_/g, " ")}:
+//                     </p>
+//                     <p className="font-medium break-words">{displayValue}</p>
+//                   </div>
+//                 );
+//               })}
+//             </div>
+//           </div>
+//         )}
+
+//         {/* Add to Cart */}
+//         <div className="flex gap-4 items-center mt-6">
+//           <button
+//             onClick={handleAddToCart}
+//             disabled={!selectedSize || stock <= 0}
+//             className={`px-8 py-3 rounded-md font-medium transition-colors ${
+//               !selectedSize || stock <= 0
+//                 ? "bg-gray-300 cursor-not-allowed text-gray-600"
+//                 : "bg-gray-800 hover:bg-gray-700 text-white"
+//             }`}
+//           >
+//             {stock <= 0 ? "Out of Stock" : "Add to Cart"}
+//           </button>
+//           {addedToCart && (
+//             <span className="text-green-600 font-medium transition-opacity duration-500">
+//               ✅ Added to Cart!
+//             </span>
+//           )}
+//         </div>
+//       </div>
+//       {/* </div> */}
+//       {/* Reviews Placeholder */}
+//       <div className="mt-12">
+//         <h2 className="font-medium text-xl mb-4">
+//           Reviews ({Math.round((averageRating ?? 0) * 20)}% Positive)
+//         </h2>
+//         <p className="text-gray-600">
+//           No reviews yet. Be the first to review this product.
+//         </p>
+//       </div>
+
+//       {/* Related Products */}
+
+//       {relatedProductData&&(<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
+//         {relatedProductData.map((item) => (
+//           <ProductItem
+//             key={item._id || item.sku}
+//             id={item._id || item.sku}
+//             image={item.images?.[0]}
+//             name={item.name}
+//             price={item.price}
+//             brand={item.brand} // Optional: Pass brand if ProductItem supports it
+//           />
+//         ))}
+//       </div>)
+//       }
+//     </div>
+//   );
+// };
+
+// export default Products;
+
+
+
+
+
+
+
+
+
+
 import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ShopContext } from "../contexts/ShopContext";
+import ProductItem from "../components/ProductItem";
 import api from "../utils/api";
 
 const Products = () => {
@@ -543,30 +840,29 @@ const Products = () => {
   const { addToCart } = useContext(ShopContext);
 
   const [productData, setProductData] = useState(null);
+  const [relatedProductData, setRelatedProductData] = useState([]);
   const [img, setImg] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [addedToCart, setAddedToCart] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // Fetch product data from backend
-  const fetchData = async () => {
+  // Fetch single product data
+  const fetchProductData = async () => {
     try {
       const res = await api.get(`/product/${productId}`);
       const data = res.data.data;
-      if (data) {
-        setProductData(data);
-        setImg(data.images?.[0] || data.image || "");
-        // Default to first available size if any
-        const firstSize =
-          Array.isArray(data.specifications?.size) &&
-          data.specifications.size.length > 0
-            ? data.specifications.size[0]
-            : "";
-        setSelectedSize(firstSize);
-      } else {
-        navigate("/collection");
-      }
-      
+      if (!data) return navigate("/collection");
+
+      setProductData(data);
+      setImg(data.images?.[0] || data.image || "");
+
+      // Default to first available size if present
+      const firstSize =
+        Array.isArray(data.specifications?.size) &&
+        data.specifications.size.length > 0
+          ? data.specifications.size[0]
+          : "";
+      setSelectedSize(firstSize);
     } catch (err) {
       console.error("Error fetching product:", err);
       navigate("/collection");
@@ -575,17 +871,42 @@ const Products = () => {
     }
   };
 
+  // Fetch related products (after productData available)
+  const fetchRelatedProducts = async (product) => {
+    if (!product?.sport && !product?.type) return;
+    try {
+      const relatedRes = await api.get("/products/related", {
+        params: {
+          sport: product.sport,
+          type: product.type,
+          excludeId: productId,
+        },
+      });
+      setRelatedProductData(relatedRes?.data?.products || []);
+    } catch (err) {
+      console.error("Error fetching related products:", err);
+      setRelatedProductData([]);
+    }
+  };
+
+  // Handle product + related fetch sequence
   useEffect(() => {
-    fetchData();
+    const loadData = async () => {
+      setLoading(true);
+      await fetchProductData();
+    };
+    loadData();
   }, [productId]);
 
-  const handleSizeClick = (size) => {
-    setSelectedSize(size);
-  };
+  // Fetch related once productData is ready
+  useEffect(() => {
+    if (productData) fetchRelatedProducts(productData);
+  }, [productData]);
+
+  const handleSizeClick = (size) => setSelectedSize(size);
 
   const handleAddToCart = () => {
     if (!selectedSize || productData?.stock <= 0) return;
-    // console.log('productData: ',productData);
     addToCart(productData, selectedSize);
     setAddedToCart(true);
     setTimeout(() => setAddedToCart(false), 2000);
@@ -603,7 +924,7 @@ const Products = () => {
     );
   }
 
-  // Destructure safely (no default overrides)
+  // Destructure safely
   const {
     name,
     price,
@@ -623,6 +944,7 @@ const Products = () => {
     Array.isArray(images) && images.length > 0
       ? images
       : [image].filter(Boolean);
+
   const sizes =
     Array.isArray(specifications?.size) && specifications.size.length > 0
       ? specifications.size
@@ -632,24 +954,25 @@ const Products = () => {
 
   return (
     <div className="border-t-2 py-10 transition-opacity ease-in duration-500 opacity-100">
-      <div className="flex gap-12 sm:gap-12 flex-col sm:flex-row">
-        {/* Image Gallery */}
-        <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-hidden justify-between sm:justify-normal sm:w-[18.7%] w-full">
+      {/* Image Gallery Section */}
+      <div className="flex lg:justify-between gap-12 flex-col sm:flex-row">
+        {/* Thumbnail images */}
+        <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-hidden justify-between sm:w-[18.7%] w-full">
           {productImages.map((imge, index) => (
             <img
               key={index}
               onClick={() => setImg(imge)}
               src={imge}
               alt={`${name || "Product"} - view ${index + 1}`}
-              className={`w-[24%] sm:w-full cursor-pointer rounded-md mb-3 border ${
+              className={`w-[14%] sm:w-[50%] cursor-pointer rounded-md mb-3 border ${
                 img === imge ? "border-gray-500" : "border-transparent"
               }`}
             />
           ))}
         </div>
 
-        {/* Main Image */}
-        <div className="w-full sm:w-[80%]">
+        {/* Main product image */}
+        <div className="w-full sm:w-[70%]">
           <img
             src={img}
             alt={name || "Product Image"}
@@ -660,12 +983,9 @@ const Products = () => {
 
       {/* Product Details */}
       <div className="flex-1 mt-8">
-        {/* Header Info */}
         <div className="flex items-start justify-between flex-wrap">
           <div>
-            <h1 className="font-medium text-2xl">
-              {name || "Unnamed Product"}
-            </h1>
+            <h1 className="font-medium text-2xl">{name || "Unnamed Product"}</h1>
             <p className="mt-2 text-gray-600 flex flex-wrap items-center gap-1">
               {(averageRating ?? 0).toFixed(1)} / 5 Stars •{" "}
               {brand || "Unknown Brand"} • {sport || "General"} {type || ""}
@@ -674,7 +994,6 @@ const Products = () => {
           <p className="font-medium text-3xl text-gray-600">${price ?? 0}</p>
         </div>
 
-        {/* Description */}
         <p className="mt-4 text-gray-600 md:w-4/5">
           {description || "No description available."}
         </p>
@@ -725,31 +1044,6 @@ const Products = () => {
           </div>
         </div>
 
-        {/* Specifications */}
-        {specifications && Object.keys(specifications).length > 0 && (
-          <div className="mb-8">
-            <p className="font-medium mb-4">Specifications</p>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-              {Object.entries(specifications).map(([key, value]) => {
-                if (!value) return null;
-                const displayValue = Array.isArray(value)
-                  ? value.join(", ")
-                  : typeof value === "object"
-                  ? JSON.stringify(value)
-                  : value;
-                return (
-                  <div key={key} className="bg-gray-50 p-3 rounded-md">
-                    <p className="text-gray-600 capitalize">
-                      {key.replace(/_/g, " ")}:
-                    </p>
-                    <p className="font-medium break-words">{displayValue}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
         {/* Add to Cart */}
         <div className="flex gap-4 items-center mt-6">
           <button
@@ -769,17 +1063,36 @@ const Products = () => {
             </span>
           )}
         </div>
-
-        {/* Reviews Placeholder */}
-        <div className="mt-12">
-          <h2 className="font-medium text-xl mb-4">
-            Reviews ({Math.round((averageRating ?? 0) * 20)}% Positive)
-          </h2>
-          <p className="text-gray-600">
-            No reviews yet. Be the first to review this product.
-          </p>
-        </div>
       </div>
+
+      {/* Reviews */}
+      <div className="mt-12">
+        <h2 className="font-medium text-xl mb-4">
+          Reviews ({Math.round((averageRating ?? 0) * 20)}% Positive)
+        </h2>
+        <p className="text-gray-600">
+          No reviews yet. Be the first to review this product.
+        </p>
+      </div>
+
+      {/* Related Products */}
+      {relatedProductData.length > 0 && (
+        <div className="mt-12">
+          <h2 className="font-medium text-xl mb-4">Related Products</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
+            {relatedProductData.map((item) => (
+              <ProductItem
+                key={item._id || item.sku}
+                id={item._id || item.sku}
+                image={item.images?.[0]}
+                name={item.name}
+                price={item.price}
+                brand={item.brand}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
