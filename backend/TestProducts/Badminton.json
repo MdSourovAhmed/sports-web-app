@@ -1,0 +1,194 @@
+[
+  {
+    "id": 1,
+    "sku": "BDM001",
+    "name": "Yonex Astrox 99 Pro",
+    "description": "High-performance badminton racket for advanced players seeking power and precision.",
+    "price": 189.99,
+    "stock": 15,
+    "sport": "Badminton",
+    "type": "Racket",
+    "brand": "Yonex",
+    "images": [],
+    "bestSell": true,
+    "specifications": {
+      "weight": "4U (83g)",
+      "balance": "Head Heavy",
+      "material": "Graphite",
+      "grip_size": "G5",
+      "color": "Black/Gold"
+    }
+  },
+  {
+    "id": 2,
+    "sku": "BDM002",
+    "name": "Yonex Nanoflare 700",
+    "description": "Lightweight racket designed for speed and control with excellent maneuverability.",
+    "price": 179.99,
+    "stock": 20,
+    "sport": "Badminton",
+    "type": "Racket",
+    "brand": "Yonex",
+    "images": [],
+    "bestSell": true,
+    "specifications": {
+      "weight": "5U (78g)",
+      "balance": "Even",
+      "material": "Graphite/Nanomesh",
+      "grip_size": "G5",
+      "color": "Red/Black"
+    }
+  },
+  {
+    "id": 3,
+    "sku": "BDM003",
+    "name": "Victor Thruster K Falcon",
+    "description": "Balanced racket offering a blend of power and control for intermediate players.",
+    "price": 159.99,
+    "stock": 18,
+    "sport": "Badminton",
+    "type": "Racket",
+    "brand": "Victor",
+    "images": [],
+    "bestSell": false,
+    "specifications": {
+      "weight": "4U (83g)",
+      "balance": "Even",
+      "material": "High Modulus Graphite",
+      "grip_size": "G5",
+      "color": "Blue/Black"
+    }
+  },
+  {
+    "id": 4,
+    "sku": "BDM004",
+    "name": "Li-Ning Turbo Charging 75",
+    "description": "Flexible shaft racket ideal for aggressive players with fast swing speed.",
+    "price": 149.99,
+    "stock": 22,
+    "sport": "Badminton",
+    "type": "Racket",
+    "brand": "Li-Ning",
+    "images": [],
+    "bestSell": false,
+    "specifications": {
+      "weight": "3U (88g)",
+      "balance": "Head Light",
+      "material": "Carbon Fiber",
+      "grip_size": "G5",
+      "color": "Yellow/Silver"
+    }
+  },
+  {
+    "id": 5,
+    "sku": "BDM005",
+    "name": "VS Smash Pro Racket",
+    "description": "Durable all-round badminton racket suitable for power hitters.",
+    "price": 129.99,
+    "stock": 25,
+    "sport": "Badminton",
+    "type": "Racket",
+    "brand": "VS",
+    "images": [],
+    "bestSell": true,
+    "specifications": {
+      "weight": "3U (86g)",
+      "balance": "Head Heavy",
+      "material": "Carbon Graphite",
+      "grip_size": "G4",
+      "color": "Matte Black"
+    }
+  },
+  {
+    "id": 6,
+    "sku": "BDM006",
+    "name": "Yonex Mavis 350 Nylon Shuttlecock (Pack of 6)",
+    "description": "Durable nylon shuttlecocks ideal for indoor and outdoor play.",
+    "price": 12.99,
+    "stock": 60,
+    "sport": "Badminton",
+    "type": "Shuttlecock",
+    "brand": "Yonex",
+    "images": [],
+    "bestSell": true,
+    "specifications": {
+      "speed": "Medium",
+      "material": "Nylon",
+      "color": "Yellow",
+      "pack": "6"
+    }
+  },
+  {
+    "id": 7,
+    "sku": "BDM007",
+    "name": "Li-Ning Feather Shuttlecock A+90",
+    "description": "Premium feather shuttlecock for professional tournament play.",
+    "price": 29.99,
+    "stock": 40,
+    "sport": "Badminton",
+    "type": "Shuttlecock",
+    "brand": "Li-Ning",
+    "images": [],
+    "bestSell": false,
+    "specifications": {
+      "speed": "Medium",
+      "material": "Feather",
+      "color": "White",
+      "pack": "12"
+    }
+  },
+  {
+    "id": 8,
+    "sku": "BDM008",
+    "name": "Yonex Badminton Grip Super Grap",
+    "description": "Popular overgrip offering superior comfort and tackiness.",
+    "price": 7.99,
+    "stock": 80,
+    "sport": "Badminton",
+    "type": "Accessory",
+    "brand": "Yonex",
+    "images": [],
+    "bestSell": true,
+    "specifications": {
+      "material": "Polyurethane",
+      "color": "Assorted",
+      "pack": "3"
+    }
+  },
+  {
+    "id": 9,
+    "sku": "BDM009",
+    "name": "Victor Badminton Racket Bag 9-Pack",
+    "description": "Spacious and durable racket bag with multiple compartments.",
+    "price": 69.99,
+    "stock": 10,
+    "sport": "Badminton",
+    "type": "Bag",
+    "brand": "Victor",
+    "images": [],
+    "bestSell": false,
+    "specifications": {
+      "capacity": "9 Rackets",
+      "material": "Polyester",
+      "color": "Blue/Black"
+    }
+  },
+  {
+    "id": 10,
+    "sku": "BDM010",
+    "name": "VS Pro Badminton Shoes",
+    "description": "Lightweight, non-marking shoes for indoor badminton play.",
+    "price": 89.99,
+    "stock": 35,
+    "sport": "Badminton",
+    "type": "Shoes",
+    "brand": "VS",
+    "images": [],
+    "bestSell": true,
+    "specifications": {
+      "size": ["7", "8", "9", "10", "11"],
+      "material": "Mesh & Rubber",
+      "color": "White/Blue"
+    }
+  }
+]

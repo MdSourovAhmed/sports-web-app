@@ -205,7 +205,6 @@ exports.listProducts = async (req, res) => {
   }
 };
 
-
 // ✅ DELETE PRODUCT
 exports.deleteProduct = async (req, res) => {
   console.log("📦 Deleting products...");
@@ -264,7 +263,15 @@ exports.updateProduct = async (req, res) => {
       // Optional: delete old images if new ones provided
       for (const imgUrl of product.images) {
         const publicId = imgUrl.split("/").pop().split(".")[0];
-        await cloudinary.uploader.destroy(`sports-shop/products/${publicId}`);
+        const res = await cloudinary.uploader.destroy(
+          `sports-shop/products/${publicId}`
+        );
+        if (res.result === "ok" || res.result === "not found") {
+          console.log("Image removed successfully");
+          product[imgUrl]='';
+        } else {
+          console.log("Unexpected response:", res);
+        }
       }
 
       uploadedImages = [];

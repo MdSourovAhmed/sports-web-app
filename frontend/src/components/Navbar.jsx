@@ -630,7 +630,11 @@ const NavLinks = ({ onLinkClick }) => {
 // User Dropdown Component
 const UserDropdown = ({ user, logout }) => (
   <div className="relative group">
-    <img src={userIcon} alt="User" className="w-5 cursor-pointer" />
+    <img
+      src={user?.profileImage || userIcon}
+      alt="User"
+      className={`${user ? "w-7 rounded-full" : "w-5"} cursor-pointer`}
+    />
     {user ? (
       <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg py-1 z-30 transition-all duration-200">
         <Link

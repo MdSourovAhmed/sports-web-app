@@ -153,9 +153,14 @@ const LatestCollections = () => {
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className="px-3 py-1 rounded-md border disabled:opacity-50 disabled:cursor-not-allowed"
+            // className="px-3 py-1 rounded-md border disabled:opacity-50 disabled:cursor-not-allowed"
+            className={`px-3 py-1 border rounded-md ${
+        currentPage === 1
+          ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+          : "bg-white text-gray-600 hover:bg-gray-100"
+      } cursor-pointer`}
           >
-            Previous
+            ← Previous
           </button>
           {[...Array(totalPages)].map((_, i) => (
             <button
@@ -163,9 +168,9 @@ const LatestCollections = () => {
               onClick={() => handlePageChange(i + 1)}
               className={`px-3 py-1 rounded-md border ${
                 currentPage === i + 1
-                  ? "bg-blue-500 text-white"
+                  ? "bg-gray-600 text-white"
                   : "bg-white text-gray-600 hover:bg-gray-100"
-              }`}
+              } cursor-pointer`}
             >
               {i + 1}
             </button>
@@ -173,9 +178,14 @@ const LatestCollections = () => {
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="px-3 py-1 rounded-md border disabled:opacity-50 disabled:cursor-not-allowed"
+            // className="px-3 py-1 rounded-md border disabled:opacity-50 disabled:cursor-not-allowed"
+            className={`px-3 py-1 border rounded-md ${
+        currentPage === totalPages
+          ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+          : "bg-white text-gray-600 hover:bg-gray-100"
+      } cursor-pointer`}
           >
-            Next
+            Next →
           </button>
         </div>
       )}

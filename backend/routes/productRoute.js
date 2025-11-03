@@ -1,50 +1,7 @@
-// const express = require("express");
-// const router = express.Router();
-// const multer = require("multer");
-// const { storage } = require("../utils/cloudinary");
-// const upload = multer({ storage });
-
-// const { authMiddleware, adminOnly } = require("../middleware/auth");
-// const productController = require("../controllers/productController");
-
-// // Public list
-// router.get("/list", productController.listProducts);
-
-// // Get single
-// router.get("/:id", productController.getProduct);
-
-// // Admin create
-// router.post(
-//   "/create",
-//   authMiddleware,
-//   adminOnly,
-//   upload.array("images", 8),
-//   productController.createProduct
-// );
-
-// // Admin update
-// router.put(
-//   "/update/:id",
-//   authMiddleware,
-//   adminOnly,
-//   upload.array("images", 8),
-//   productController.updateProduct
-// );
-
-// // Admin delete
-// router.delete(
-//   "/remove/:id",
-//   authMiddleware,
-//   adminOnly,
-//   productController.deleteProduct
-// );
-
-// module.exports = router;
-
 const express = require("express");
 const router = express.Router();
 const {
-  relatedProducts,
+  // relatedProducts,
   createProduct,
   listProducts,
   deleteProduct,

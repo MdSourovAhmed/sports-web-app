@@ -953,11 +953,12 @@ const Products = () => {
       : [];
 
   return (
-    <div className="border-t-2 py-10 transition-opacity ease-in duration-500 opacity-100">
+    <div className="border-t border-gray-400 py-10 transition-opacity ease-in duration-500 opacity-100">
       {/* Image Gallery Section */}
       <div className="flex lg:justify-between gap-12 flex-col sm:flex-row">
         {/* Thumbnail images */}
-        <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-hidden justify-between sm:w-[18.7%] w-full">
+        <div className="flex-1 flex flex-col-reverse sm:flex-row gap-3">
+          <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-hidden justify-between sm:w-[18.7%] w-full">
           {productImages.map((imge, index) => (
             <img
               key={index}
@@ -969,37 +970,28 @@ const Products = () => {
               }`}
             />
           ))}
-        </div>
+          </div>
 
         {/* Main product image */}
-        <div className="w-full sm:w-[70%]">
+          <div className="w-full sm:w-[70%]">
           <img
             src={img}
             alt={name || "Product Image"}
             className="w-full h-auto rounded-lg shadow-sm"
           />
+          </div>
         </div>
-      </div>
+      {/* </div> */}
 
       {/* Product Details */}
       <div className="flex-1 mt-8">
-        <div className="flex items-start justify-between flex-wrap">
-          <div>
-            <h1 className="font-medium text-2xl">{name || "Unnamed Product"}</h1>
-            <p className="mt-2 text-gray-600 flex flex-wrap items-center gap-1">
-              {(averageRating ?? 0).toFixed(1)} / 5 Stars •{" "}
-              {brand || "Unknown Brand"} • {sport || "General"} {type || ""}
-            </p>
+        <h1 className="font-medium text-2xl mt-2 ">{name || "Unnamed Product"}</h1>
+          <div className="flec items-center gap-1 mt-2">
+            <p className="pl-2">  {(averageRating ?? 0).toFixed(1)} / 5 Stars •{" "}
+              {brand || "Unknown Brand"} • {sport || "General"} {type || ""}</p>
           </div>
-          <p className="font-medium text-3xl text-gray-600">${price ?? 0}</p>
-        </div>
-
-        <p className="mt-4 text-gray-600 md:w-4/5">
-          {description || "No description available."}
-        </p>
-
-        {/* Stock & Tags */}
-        <div className="mt-6 flex items-center justify-between flex-wrap gap-3">
+          <p className="mt-5 text-3xl font-medium ">${price ?? 0}</p>
+          <p className="mt-5 text-gray-500 md:w-4/5 ">{description || "No description available."}</p>
           <p
             className={`font-medium ${
               stock > 0 ? "text-green-600" : "text-red-600"
@@ -1007,7 +999,31 @@ const Products = () => {
           >
             {stock > 0 ? `In Stock: ${stock} left` : "Out of Stock"}
           </p>
-          <div className="flex gap-2 flex-wrap">
+        {/* <div className="flex items-start justify-between flex-wrap"> */}
+          {/* <div> */}
+            {/* <h1 className="font-medium text-2xl">{name || "Unnamed Product"}</h1> */}
+            {/* <p className="mt-2 text-gray-600 flex flex-wrap items-center gap-1">
+              {(averageRating ?? 0).toFixed(1)} / 5 Stars •{" "}
+              {brand || "Unknown Brand"} • {sport || "General"} {type || ""}
+            </p> */}
+          {/* </div> */}
+          {/* <p className="font-medium text-3xl text-gray-600">${price ?? 0}</p> */}
+        {/* </div> */}
+
+        {/* <p className="mt-4 text-gray-600 md:w-4/5">
+          {description || "No description available."}
+        </p> */}
+
+        {/* Stock & Tags */}
+        {/* <div className="mt-6 flex items-center justify-between flex-wrap gap-3">
+          <p
+            className={`font-medium ${
+              stock > 0 ? "text-green-600" : "text-red-600"
+            }`}
+          >
+            {stock > 0 ? `In Stock: ${stock} left` : "Out of Stock"}
+          </p> */}
+          {/* <div className="flex gap-2 flex-wrap">
             {Array.isArray(tags) && tags.length > 0 ? (
               tags.map((tag, i) => (
                 <span key={i} className="px-2 py-1 bg-gray-100 text-xs rounded">
@@ -1017,14 +1033,39 @@ const Products = () => {
             ) : (
               <span className="text-gray-400 text-sm">No tags</span>
             )}
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
 
         {/* Size Selector */}
-        <div className="flex gap-4 my-8 flex-col">
-          <p className="font-medium">Select Size</p>
-          <div className="flex gap-4 flex-wrap">
-            {sizes.length > 0 ? (
+
+        <div className="flex flex-col gap-4 my-8">
+            <p>Select Size</p>
+            <div className="flex gap-2">
+               {sizes.length > 0 ? (
+              sizes.map((itm, indx) => (
+                <button
+                  key={indx}
+                  onClick={() => handleSizeClick(itm)}
+                  className={`border cursor-pointer py-2 px-4 rounded-md transition-colors ${
+                    selectedSize == itm ? "border-orange-500" : ""
+                    // selectedSize === itm
+                    //   ? "bg-gray-800 text-white border-gray-800"
+                    //   : "bg-gray-100 hover:bg-gray-200"
+                  }`}
+                >
+                  {itm}
+                </button>
+              ))
+            ) : (
+              <p className="text-gray-500">No size options</p>
+            )}
+                {/* <button className={`border py-2 px-4 bg-gray-100 ${item==size?'border-orange-500':''}`}>Size</button> */}
+            </div>
+          </div>
+        {/* <div className="flex gap-4 my-8 flex-col"> */}
+          {/* <p className="font-medium">Select Size</p> */}
+          {/* <div className="flex gap-4 flex-wrap"> */}
+            {/* {sizes.length > 0 ? (
               sizes.map((itm, indx) => (
                 <button
                   key={indx}
@@ -1040,12 +1081,12 @@ const Products = () => {
               ))
             ) : (
               <p className="text-gray-500">No size options</p>
-            )}
-          </div>
-        </div>
+            )} */}
+          {/* </div> */}
+        {/* </div> */}
 
         {/* Add to Cart */}
-        <div className="flex gap-4 items-center mt-6">
+        {/* <div className="flex gap-4 items-center mt-6">
           <button
             onClick={handleAddToCart}
             disabled={!selectedSize || stock <= 0}
@@ -1062,7 +1103,26 @@ const Products = () => {
               ✅ Added to Cart!
             </span>
           )}
-        </div>
+        </div> */}
+        <button
+            onClick={handleAddToCart}
+            disabled={!selectedSize || stock <= 0}
+            className={`px-8 py-3 rounded-md font-medium transition-colors ${
+              !selectedSize || stock <= 0
+                ? "bg-gray-300 cursor-not-allowed text-gray-600"
+                : "bg-gray-800 hover:bg-gray-700 text-white"
+            } cursor-pointer`}
+          >
+            {stock <= 0 ? "Out of Stock" : "Add to Cart"}
+          </button>
+          {addedToCart && (
+            <span className="text-green-600 font-medium transition-opacity duration-500">
+              ✅ Added to Cart!
+            </span>
+          )}
+          {/* <button className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700 ">Add to Cart</button> */}
+          <hr className="mt-8 sm:w-4/5" />
+      </div>
       </div>
 
       {/* Reviews */}

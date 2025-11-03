@@ -361,6 +361,10 @@ const ShopContextProvider = ({ children }) => {
     }));
   };
 
+  const clearCart=()=>{
+    setCartItems({});
+  }
+
   // ✅ Get total price
   // const getTotalCartAmount = useMemo(
   //   () =>
@@ -390,6 +394,7 @@ const ShopContextProvider = ({ children }) => {
     addToCart,
     removeFromCart,
     updateCartItemCount,
+    clearCart,
     getTotalCartAmount,
     cartCount,
     searchResults,

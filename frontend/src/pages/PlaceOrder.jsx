@@ -55,6 +55,7 @@ const PlaceOrder = () => {
       // });
 
       const res = await api.post("/place-order", orderData);
+      console.log(res);
 
       if (res.data.success) {
         toast.success("Order placed successfully!");

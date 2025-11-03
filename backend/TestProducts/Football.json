@@ -1,0 +1,148 @@
+[
+  {
+    "id": 1,
+    "sku": "FTB001",
+    "name": "Adidas Al Rihla Official Match Ball",
+    "description": "FIFA World Cup 2022 official football, designed for precision and control.",
+    "price": 149.99,
+    "stock": 25,
+    "sport": "Football",
+    "type": "Ball",
+    "brand": "Adidas",
+    "images": [],
+    "bestSell": true,
+    "specifications": {
+      "size": ["5"],
+      "material": "Polyurethane",
+      "color": "White/Multicolor",
+      "weight": "420g"
+    }
+  },
+  {
+    "id": 2,
+    "sku": "FTB002",
+    "name": "Nike Flight Ball",
+    "description": "Premium football engineered for stable flight and durability.",
+    "price": 139.99,
+    "stock": 28,
+    "sport": "Football",
+    "type": "Ball",
+    "brand": "Nike",
+    "images": [],
+    "bestSell": true,
+    "specifications": {
+      "size": ["5"],
+      "material": "Thermoplastic Polyurethane",
+      "color": "White/Orange",
+      "weight": "430g"
+    }
+  },
+  {
+    "id": 3,
+    "sku": "FTB003",
+    "name": "Puma Ultra Match FG Shoes",
+    "description": "Lightweight football boots designed for explosive speed and agility.",
+    "price": 119.99,
+    "stock": 40,
+    "sport": "Football",
+    "type": "Shoes",
+    "brand": "Puma",
+    "images": [],
+    "bestSell": true,
+    "specifications": {
+      "size": ["7", "8", "9", "10", "11"],
+      "material": "Synthetic Mesh",
+      "color": "Orange/Black"
+    }
+  },
+  {
+    "id": 4,
+    "sku": "FTB004",
+    "name": "Nike Mercurial Superfly 9 Elite",
+    "description": "Top-tier football boots preferred by professionals for speed and touch.",
+    "price": 249.99,
+    "stock": 12,
+    "sport": "Football",
+    "type": "Shoes",
+    "brand": "Nike",
+    "images": [],
+    "bestSell": true,
+    "specifications": {
+      "size": ["8", "9", "10", "11"],
+      "material": "Flyknit",
+      "color": "Crimson/Black"
+    }
+  },
+  {
+    "id": 5,
+    "sku": "FTB005",
+    "name": "Adidas Predator Training Gloves",
+    "description": "Durable goalkeeper gloves with superior grip in all conditions.",
+    "price": 59.99,
+    "stock": 30,
+    "sport": "Football",
+    "type": "Gloves",
+    "brand": "Adidas",
+    "images": [],
+    "bestSell": true,
+    "specifications": {
+      "material": "Latex & Mesh",
+      "color": "Black/Red",
+      "size": ["M", "L", "XL"]
+    }
+  },
+  {
+    "id": 6,
+    "sku": "FTB006",
+    "name": "Puma Teamwear Jersey",
+    "description": "Breathable football jersey suitable for both training and matches.",
+    "price": 39.99,
+    "stock": 50,
+    "sport": "Football",
+    "type": "Jersey",
+    "brand": "Puma",
+    "images": [],
+    "bestSell": false,
+    "specifications": {
+      "material": "Polyester",
+      "color": "Blue",
+      "size": ["S", "M", "L", "XL"]
+    }
+  },
+  {
+    "id": 7,
+    "sku": "FTB007",
+    "name": "Adidas Condivo 22 Shorts",
+    "description": "Lightweight and comfortable football shorts for all levels.",
+    "price": 29.99,
+    "stock": 60,
+    "sport": "Football",
+    "type": "Shorts",
+    "brand": "Adidas",
+    "images": [],
+    "bestSell": false,
+    "specifications": {
+      "material": "Recycled Polyester",
+      "color": "Black",
+      "size": ["S", "M", "L", "XL"]
+    }
+  },
+  {
+    "id": 8,
+    "sku": "FTB008",
+    "name": "Nike Shin Guards Pro",
+    "description": "High-density shell shin guards offering protection with comfort.",
+    "price": 24.99,
+    "stock": 45,
+    "sport": "Football",
+    "type": "Guard",
+    "brand": "Nike",
+    "images": [],
+    "bestSell": false,
+    "specifications": {
+      "material": "Polypropylene",
+      "color": "White/Black",
+      "size": ["S", "M", "L"]
+    }
+  }
+]

@@ -40,14 +40,6 @@ const User = require("../models/User");
 
 const cloudinary = require("../config/cloudinary");
 
-//  cloudinary.config();
-
-// // Configure Cloudinary
-// cloudinary.config({
-//   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-//   api_key: process.env.CLOUDINARY_API_KEY,
-//   api_secret: process.env.CLOUDINARY_API_SECRET,
-// });
 
 // ✅ GET /api/user/profile → Fetch logged-in user profile
 exports.getProfile = async (req, res) => {
@@ -63,9 +55,19 @@ exports.getProfile = async (req, res) => {
 
 // ✅ PUT /api/user/profile → Update user profile
 exports.updateProfile = async (req, res) => {
+  console.log("updating profile----");
   try {
+    const user = await User.findById(req.user._id).select("-password");
+    if (!user) return res.status(404).json({ message: "User not found" });
 
+    let userImage = user.profileImage;
     let profileImageUrl = req.body.profileImage;
+
+    if (profileImageUrl ) {
+      // Optional: delete old images if new ones provided
+      const publicId = userImage.split("/").pop().split(".")[0];
+      await cloudinary.uploader.destroy(`user_profiles/${publicId}`);
+    }
 
     // If profileImage is a base64 string, upload to Cloudinary
     if (profileImageUrl && profileImageUrl.startsWith("data:image")) {
@@ -86,12 +88,13 @@ exports.updateProfile = async (req, res) => {
       profileImage: profileImageUrl || "",
     };
 
-    const user = await User.findByIdAndUpdate(req.user._id, updates, {
+    const userUpdated = await User.findByIdAndUpdate(req.user._id, updates, {
       new: true,
     }).select("-password");
 
-    if (!user) return res.status(404).json({ message: "User not found" });
-    res.json({ message: "Profile updated successfully", user });
+    if (!userUpdated)
+      return res.status(404).json({ message: "User not found" });
+    res.json({ message: "Profile updated successfully", userUpdated });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Error updating profile" });

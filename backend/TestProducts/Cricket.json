@@ -1,0 +1,188 @@
+[
+  {
+    "id": 1,
+    "sku": "CRK001",
+    "name": "Kookaburra Kahuna Pro Bat",
+    "description": "Professional grade English willow cricket bat for maximum power and control.",
+    "price": 329.99,
+    "stock": 12,
+    "sport": "Cricket",
+    "type": "Bat",
+    "brand": "Kookaburra",
+    "images": [],
+    "bestSell": true,
+    "specifications": {
+      "size": ["Full Size"],
+      "material": "English Willow",
+      "weight": "1180g",
+      "color": "Natural",
+      "grip": "Pro Grip"
+    }
+  },
+  {
+    "id": 2,
+    "sku": "CRK002",
+    "name": "SS Ton Gladiator Bat",
+    "description": "Top-of-the-line cricket bat preferred by international players.",
+    "price": 299.99,
+    "stock": 10,
+    "sport": "Cricket",
+    "type": "Bat",
+    "brand": "SS",
+    "images": [],
+    "bestSell": true,
+    "specifications": {
+      "size": ["Full Size"],
+      "material": "English Willow",
+      "weight": "1200g",
+      "color": "Natural",
+      "grip": "Comfort Grip"
+    }
+  },
+  {
+    "id": 3,
+    "sku": "CRK003",
+    "name": "Gray-Nicolls Powerbow Inferno",
+    "description": "Stylish bat designed for aggressive stroke play with great pickup.",
+    "price": 259.99,
+    "stock": 14,
+    "sport": "Cricket",
+    "type": "Bat",
+    "brand": "Gray-Nicolls",
+    "images": [],
+    "bestSell": false,
+    "specifications": {
+      "size": ["Full Size"],
+      "material": "English Willow",
+      "weight": "1170g",
+      "color": "Natural",
+      "grip": "Dynamic Grip"
+    }
+  },
+  {
+    "id": 4,
+    "sku": "CRK004",
+    "name": "Adidas Incurza Batting Pads",
+    "description": "Lightweight, high-protection batting pads designed for comfort.",
+    "price": 89.99,
+    "stock": 30,
+    "sport": "Cricket",
+    "type": "Pad",
+    "brand": "Adidas",
+    "images": [],
+    "bestSell": true,
+    "specifications": {
+      "material": "PU & Foam",
+      "color": "White/Blue",
+      "size": ["Men", "Youth"]
+    }
+  },
+  {
+    "id": 5,
+    "sku": "CRK005",
+    "name": "SG Test Batting Gloves",
+    "description": "Premium leather gloves providing superior grip and protection.",
+    "price": 49.99,
+    "stock": 50,
+    "sport": "Cricket",
+    "type": "Gloves",
+    "brand": "SG",
+    "images": [],
+    "bestSell": false,
+    "specifications": {
+      "material": "Leather & Cotton",
+      "color": "White/Red",
+      "size": ["Men", "Youth"]
+    }
+  },
+  {
+    "id": 6,
+    "sku": "CRK006",
+    "name": "Kookaburra Pro 600 Helmet",
+    "description": "Lightweight cricket helmet with excellent ventilation and safety features.",
+    "price": 74.99,
+    "stock": 20,
+    "sport": "Cricket",
+    "type": "Helmet",
+    "brand": "Kookaburra",
+    "images": [],
+    "bestSell": true,
+    "specifications": {
+      "material": "ABS Shell",
+      "color": "Navy Blue",
+      "size": ["Small", "Medium", "Large"]
+    }
+  },
+  {
+    "id": 7,
+    "sku": "CRK007",
+    "name": "Adidas Adipower Vector Cricket Shoes",
+    "description": "High-performance cricket shoes with enhanced traction and stability.",
+    "price": 99.99,
+    "stock": 25,
+    "sport": "Cricket",
+    "type": "Shoes",
+    "brand": "Adidas",
+    "images": [],
+    "bestSell": true,
+    "specifications": {
+      "size": ["7", "8", "9", "10", "11"],
+      "material": "Mesh & Rubber",
+      "color": "White/Red"
+    }
+  },
+  {
+    "id": 8,
+    "sku": "CRK008",
+    "name": "SS Elite Wicket Keeping Gloves",
+    "description": "Professional gloves with enhanced grip and flexibility for wicket keepers.",
+    "price": 59.99,
+    "stock": 30,
+    "sport": "Cricket",
+    "type": "Gloves",
+    "brand": "SS",
+    "images": [],
+    "bestSell": false,
+    "specifications": {
+      "material": "Leather",
+      "color": "Green/White",
+      "size": ["Men"]
+    }
+  },
+  {
+    "id": 9,
+    "sku": "CRK009",
+    "name": "Gray-Nicolls Team 800 Kit Bag",
+    "description": "Spacious cricket bag with separate compartments for gear and shoes.",
+    "price": 89.99,
+    "stock": 18,
+    "sport": "Cricket",
+    "type": "Bag",
+    "brand": "Gray-Nicolls",
+    "images": [],
+    "bestSell": false,
+    "specifications": {
+      "capacity": "Full Kit",
+      "material": "Polyester",
+      "color": "Black/Red"
+    }
+  },
+  {
+    "id": 10,
+    "sku": "CRK010",
+    "name": "Kookaburra County Red Ball",
+    "description": "Official red leather cricket ball suitable for test matches.",
+    "price": 34.99,
+    "stock": 40,
+    "sport": "Cricket",
+    "type": "Ball",
+    "brand": "Kookaburra",
+    "images": [],
+    "bestSell": true,
+    "specifications": {
+      "material": "Leather",
+      "color": "Red",
+      "weight": "156g"
+    }
+  }
+]
