@@ -1,4 +1,4 @@
-import { useOrders } from "../hooks/useOrders";
+import { useOrders } from "../hooks/UseOrders";
 import { useState } from "react";
 import { Loader2, Pencil, XCircle } from "lucide-react";
 import OrderModal from "../components/OrderModal";
