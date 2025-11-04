@@ -5,7 +5,7 @@ import searchIcon from "../assets/search.png";
 import cartIcon from "../assets/cart.png";
 import userIcon from "../assets/user.png";
 import menuIcon from "../assets/menu.png";
-import closeIcon from "../assets/close.PNG";
+import closeIcon from "../assets/close.png";
 import { ShopContext } from "../contexts/ShopContext";
 
 const Navbar = () => {
