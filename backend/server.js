@@ -13,7 +13,7 @@ app.use(
   cors({
     // origin: ["https://ayah-archive-frontend.vercel.app","http://localhost:5173"], // Allow requests from Vite frontend
     origin: [process.env.FRONTEND_URL1, process.env.FRONTEND_URL2,process.env.FRONTEND_URL3],
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
+    methods: ["GET", "POST", "PUT","PATCH", "DELETE"], // Allowed methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
   })
 );

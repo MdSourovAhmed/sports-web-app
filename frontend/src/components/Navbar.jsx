@@ -25,7 +25,7 @@ const Navbar = () => {
         src={logo}
         onClick={() => navigate("/")}
         alt="Site Logo"
-        className="w-32 cursor-pointer"
+        className="w-[max(10%,96px)] cursor-pointer"
       />
 
       {/* Desktop Nav Links */}
