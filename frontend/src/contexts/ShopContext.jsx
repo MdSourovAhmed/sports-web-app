@@ -286,26 +286,26 @@ const ShopContextProvider = ({ children }) => {
   }, []);
 
   // ✅ Load cart from localStorage on mount
-// useEffect(() => {
-//   const savedCart = localStorage.getItem("cartItems");
-//   if (savedCart) {
-//     try {
-//       setCartItems(JSON.parse(savedCart));
-//     } catch (err) {
-//       console.error("Error parsing saved cart:", err);
-//       localStorage.removeItem("cartItems");
-//     }
-//   }
-// }, []);
+useEffect(() => {
+  const savedCart = localStorage.getItem("cartItems");
+  if (savedCart) {
+    try {
+      setCartItems(JSON.parse(savedCart));
+    } catch (err) {
+      console.error("Error parsing saved cart:", err);
+      localStorage.removeItem("cartItems");
+    }
+  }
+}, []);
 
-// // ✅ Save cart whenever it changes
-// useEffect(() => {
-//   if (Object.keys(cartItems).length > 0) {
-//     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-//   } else {
-//     localStorage.removeItem("cartItems");
-//   }
-// }, [cartItems]);
+// ✅ Save cart whenever it changes
+useEffect(() => {
+  if (Object.keys(cartItems).length > 0) {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  } else {
+    localStorage.removeItem("cartItems");
+  }
+}, [cartItems]);
 
 
   // ✅ Authentication
