@@ -54,23 +54,48 @@ const User = require("../models/User");
  *
  */
 
+const authAdmin = async (req, res, next) => {
+  console.log("Admin Authentication starts...");
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader?.startsWith("Bearer ")) {
+      return res
+        .status(401)
+        .json({ success: false, message: "No token provided" });
+    }
+
+    const token = authHeader.split(" ")[1];
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(payload.id).select("-password");
+    if (!user) {
+      return res
+        .status(401)
+        .json({ success: false, message: "User not found" });
+    }
+    if (user.role!="admin") {
+      return res
+        .status(500)
+        .json({ success: false, message: "Unauthorized access..." });
+    }
+    return res.json({
+      success: true,
+      user: user,
+      // token,
+      // user: {
+      //   id: user._id,
+      //   email: user.email,
+      //   name: user.name,
+      //   role: user.role,
+      // },
+    });
+  } catch (err) {
+    return res.status(401).json({ message: "Invalid token" });
+  }
+  next();
+};
+
 const authClientUser = async (req, res, next) => {
   console.log("Client User Authentication starts");
-  // const token = req.header("Authorization")?.replace("Bearer ", "");
-  // if (!token) {
-  //   return res.status(401).json({ message: "No token, authorization denied" });
-  // }
-
-  //  console.log('Auth middleware hitted,,,');
-  // const authHeader = req.headers.authorization;
-  // if (!authHeader?.startsWith("Bearer ")) {
-  //   return res
-  //     .status(401)
-  //     .json({ success: false, message: "No token provided" });
-  // }
-
-  // const token = authHeader.split(" ")[1];
-
   try {
     const authHeader = req.headers.authorization;
     if (!authHeader?.startsWith("Bearer ")) {
@@ -89,7 +114,7 @@ const authClientUser = async (req, res, next) => {
     }
     return res.json({
       success: true,
-      user:user
+      user: user,
       // token,
       // user: {
       //   id: user._id,
@@ -156,4 +181,4 @@ const adminOnly = (req, res, next) => {
   next();
 };
 
-module.exports = { authMiddleware, adminOnly, authClientUser };
+module.exports = { authMiddleware, adminOnly, authClientUser, authAdmin };
