@@ -36,7 +36,7 @@ exports.signup = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-  console.log(" login req received...");
+  console.log("Login request received...");
   try {
     const { email, password } = req.body;
     if (!email || !password)

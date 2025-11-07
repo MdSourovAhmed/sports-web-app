@@ -74,8 +74,8 @@ const authAdmin = async (req, res, next) => {
     }
     if (user.role!="admin") {
       return res
-        .status(500)
-        .json({ success: false, message: "Unauthorized access..." });
+        .status(403)
+        .json({ success: false, message: "Admin privileges required" });
     }
     return res.json({
       success: true,
@@ -130,7 +130,7 @@ const authClientUser = async (req, res, next) => {
 };
 
 const authMiddleware = async (req, res, next) => {
-  console.log("Auth middleware hitted,,,");
+  console.log("Auth middleware hitted...");
   try {
     const authHeader = req.headers.authorization;
     if (!authHeader?.startsWith("Bearer ")) {
