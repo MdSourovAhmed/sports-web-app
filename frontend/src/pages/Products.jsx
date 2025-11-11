@@ -977,7 +977,8 @@ const Products = () => {
           <img
             src={img}
             alt={name || "Product Image"}
-            className="w-full h-auto rounded-lg shadow-sm"
+            // className="w-full h-auto rounded-lg shadow-sm"
+            className="w-full max-h-3/4 rounded-lg shadow-sm"
           />
           </div>
         </div>

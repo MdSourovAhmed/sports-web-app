@@ -30,6 +30,10 @@ app.use("/api/client", require("./routes/userRoutes"));
 app.use("/api/client", require("./routes/authRoutes"));
 app.use("/api/client", require("./routes/clientRoutes"));
 app.use("/api/client", require("./routes/orderRoutes"));
+app.get("/api/client/product/search",async(req,res)=>{
+  console.log(req.query);
+  res.status(200).json({mess:"req received."});
+})
 
 
 app.use("/api/admin", require("./routes/orderRoutes"));

@@ -125,6 +125,6 @@ router.get("/latest", getLatestProducts);
 router.get("/bestsellers", getBestSellers);
 
 // NEW: Search products (combines text search with filters)
-router.get("/search", searchProducts);
+// router.get("/product/search", searchProducts);
 
 module.exports = router;
