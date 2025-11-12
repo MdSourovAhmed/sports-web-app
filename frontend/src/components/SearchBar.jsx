@@ -1,13 +1,123 @@
+import React, { useContext, useEffect, useState } from "react";
+import { ShopContext } from "../contexts/ShopContext";
+import searchIcon from "../assets/search.png";
+import closeIcon from "../assets/close.png";
+import { useLocation } from "react-router-dom";
+import api from "../utils/api";
+
+const SearchBar = () => {
+  const { search, setSearch, showSearch, setShowSearch } =
+    useContext(ShopContext);
+  const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [results, setResults] = useState([]);
+  const [error, setError] = useState("");
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const pageLocation = useLocation();
+
+  // Only show search bar in "collection" route
+  useEffect(() => {
+    setVisible(pageLocation.pathname.includes("collection"));
+  }, [pageLocation]);
+
+  // Debounce to prevent excessive API calls
+  useEffect(() => {
+    if (!search.trim()) {
+      setResults([]);
+      setDropdownVisible(false);
+      return;
+    }
+
+    const delay = setTimeout(() => {
+      handleSearch(search);
+    }, 400);
+
+    return () => clearTimeout(delay);
+  }, [search]);
+
+  const handleSearch = async (query) => {
+    try {
+      setLoading(true);
+      setError("");
+      const res = await api.get("/search", {
+        params: { q: query.trim(), limit: 5 },
+      });
+      const products = res.data.products || [];
+      setResults(products);
+      setDropdownVisible(products.length > 0);
+    } catch (err) {
+      console.error("Search error:", err);
+      setError("Something went wrong. Try again.");
+      setDropdownVisible(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return showSearch && visible ? (
+    <div className="border-t border-gray-400 bg-gray-50 text-center relative">
+      <div className="inline-flex items-center justify-center border border-gray-400 px-5 py-2 my-5 mx-3 rounded-full w-3/4 sm:w-1/2">
+        <input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          type="text"
+          className="flex-1 outline-none bg-inherit text-sm"
+          placeholder="Search products..."
+        />
+        {loading ? (
+          <div className="loader w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
+        ) : (
+          <img src={searchIcon} className="w-4" alt="Search" />
+        )}
+      </div>
+
+      <img
+        onClick={() => setShowSearch(false)}
+        src={closeIcon}
+        alt="Close"
+        className="inline w-4 cursor-pointer"
+      />
+
+      {/* Search Results Dropdown */}
+      {dropdownVisible && (
+        <div className="absolute left-1/2 transform -translate-x-1/2 bg-white shadow-lg border border-gray-300 rounded-md w-3/4 sm:w-1/2 max-h-64 overflow-y-auto z-50">
+          {results.map((p) => (
+            <div
+              key={p._id}
+              className="p-2 text-left hover:bg-gray-100 cursor-pointer"
+              onClick={() => {
+                window.location.href = `/product/${p._id}`;
+              }}
+            >
+              <div className="font-semibold text-sm">{p.name}</div>
+              <div className="text-xs text-gray-500">{p.category}</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+    </div>
+  ) : null;
+};
+
+export default SearchBar;
+
 // import React, { useContext, useEffect, useState } from "react";
 // import { ShopContext } from "../contexts/ShopContext";
 // import search_bar from "../assets/search.png";
 // import close from "../assets/close.png";
 // import { useLocation } from "react-router-dom";
+// import api from "../utils/api";
 
 // const SearchBar = () => {
 //   const { search, setSearch, showSearch, setShowSearch } =
 //     useContext(ShopContext);
 //   const [visible, setVisible] = useState(false);
+//   const [loading, setLoading] = useState(false);
+//     const [dropdownVisible, setDropdownVisible] = useState(false);
+//     const [results, setResults] = useState([]);
+//   const [error, setError] = useState("");
 //   const pageLocation = useLocation();
 
 //   useEffect(() => {
@@ -17,6 +127,30 @@
 //       setVisible(false);
 //     }
 //   }, [pageLocation]);
+
+//   const handleSearch = async (query) => {
+//     try {
+//       setLoading(true);
+//       setError("");
+//       console.log(query.trim());
+//       const res = await api.get("/search", {
+//         params: { q: query, limit: 5 },
+//       });
+//       const products = res.data.products || [];
+//       setResults(products);
+//       setSearchResults?.(products);
+//       setDropdownVisible(products.length > 0);
+//     } catch (err) {
+//       console.error("Search error:", err);
+//       setError("Something went wrong. Try again.");
+//       setDropdownVisible(false);
+//     }
+//   };
+
+//   useEffect(() => {
+//     console.log("Searching: ", search);
+//     handleSearch(search);
+//   }, [search]);
 
 //   return showSearch && visible ? (
 //     <div className=" border-t border-gray-400 bg-gray-50 text-center ">
@@ -42,180 +176,180 @@
 
 // export default SearchBar;
 
-import React, { useContext, useEffect, useState, useCallback } from "react";
-import { ShopContext } from "../contexts/ShopContext";
-import search_bar from "../assets/search.png";
-import close from "../assets/close.png";
-import { useLocation, useNavigate } from "react-router-dom";
-import api from "../utils/api"; // Axios instance for backend
+// import React, { useContext, useEffect, useState, useCallback } from "react";
+// import { ShopContext } from "../contexts/ShopContext";
+// import search_bar from "../assets/search.png";
+// import close from "../assets/close.png";
+// import { useLocation, useNavigate } from "react-router-dom";
+// import api from "../utils/api"; // Axios instance for backend
 
-const SearchBar = () => {
-  const {
-    search,
-    setSearch,
-    showSearch,
-    setShowSearch,
-    setSearchResults, // optional: used globally
-  } = useContext(ShopContext);
+// const SearchBar = () => {
+//   const {
+//     search,
+//     setSearch,
+//     showSearch,
+//     setShowSearch,
+//     setSearchResults, // optional: used globally
+//   } = useContext(ShopContext);
 
-  const [visible, setVisible] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [results, setResults] = useState([]);
-  const [error, setError] = useState("");
+//   const [visible, setVisible] = useState(false);
+//   const [loading, setLoading] = useState(false);
+//   const [dropdownVisible, setDropdownVisible] = useState(false);
+//   const [results, setResults] = useState([]);
+//   const [error, setError] = useState("");
 
-  const pageLocation = useLocation();
-  const navigate = useNavigate();
+//   const pageLocation = useLocation();
+//   const navigate = useNavigate();
 
-  useEffect(() => {
-    setVisible(pageLocation.pathname.includes("collection"));
-  }, [pageLocation]);
+//   useEffect(() => {
+//     setVisible(pageLocation.pathname.includes("collection"));
+//   }, [pageLocation]);
 
-  /** Debounce helper */
-  function debounce(func, delay) {
-    let timer;
-    return (...args) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => func(...args), delay);
-    };
-  }
+//   /** Debounce helper */
+//   function debounce(func, delay) {
+//     let timer;
+//     return (...args) => {
+//       clearTimeout(timer);
+//       timer = setTimeout(() => func(...args), delay);
+//     };
+//   }
 
-  /** Main search handler */
-  // const handleSearch = useCallback(
-  //   debounce(async (query) => {
-  //     if (!query.trim() || query.length < 4) {
-  //       setResults([]);
-  //       setDropdownVisible(false);
-  //       return;
-  //     }
-  //     console.log('Query: ',query);
+//   /** Main search handler */
+//   // const handleSearch = useCallback(
+//   //   debounce(async (query) => {
+//   //     if (!query.trim() || query.length < 4) {
+//   //       setResults([]);
+//   //       setDropdownVisible(false);
+//   //       return;
+//   //     }
+//   //     console.log('Query: ',query);
 
-  //     try {
-  //       setLoading(true);
-  //       setError("");
-  //       console.log(query.trim());
-  //       const res = await api.get("/product/search", {
-  //         // params: { q: query.trim(), limit: 5 },
-  //         params: { q: query, limit: 5 },
-  //       });
-  //       const products = res.data.products || [];
-  //       setResults(products);
-  //       setSearchResults?.(products);
-  //       setDropdownVisible(products.length > 0);
-  //     } catch (err) {
-  //       console.error("Search error:", err);
-  //       setError("Something went wrong. Try again.");
-  //       setDropdownVisible(false);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }, 350),
-  //   []
-  // );
+//   //     try {
+//   //       setLoading(true);
+//   //       setError("");
+//   //       console.log(query.trim());
+//   //       const res = await api.get("/product/search", {
+//   //         // params: { q: query.trim(), limit: 5 },
+//   //         params: { q: query, limit: 5 },
+//   //       });
+//   //       const products = res.data.products || [];
+//   //       setResults(products);
+//   //       setSearchResults?.(products);
+//   //       setDropdownVisible(products.length > 0);
+//   //     } catch (err) {
+//   //       console.error("Search error:", err);
+//   //       setError("Something went wrong. Try again.");
+//   //       setDropdownVisible(false);
+//   //     } finally {
+//   //       setLoading(false);
+//   //     }
+//   //   }, 350),
+//   //   []
+//   // );
 
-  const handleSearch = async (query) => {
-    try {
-      setLoading(true);
-      setError("");
-      console.log(query.trim());
-      const res = await api.get("/product/search");
-      const products = res.data.products || [];
-      setResults(products);
-      setSearchResults?.(products);
-      setDropdownVisible(products.length > 0);
-    } catch (err) {
-      console.error("Search error:", err);
-      setError("Something went wrong. Try again.");
-      setDropdownVisible(false);
-    }
-  };
+//   const handleSearch = async (query) => {
+//     try {
+//       setLoading(true);
+//       setError("");
+//       console.log(query.trim());
+//       const res = await api.get("/product/search");
+//       const products = res.data.products || [];
+//       setResults(products);
+//       setSearchResults?.(products);
+//       setDropdownVisible(products.length > 0);
+//     } catch (err) {
+//       console.error("Search error:", err);
+//       setError("Something went wrong. Try again.");
+//       setDropdownVisible(false);
+//     }
+//   };
 
-  /** Trigger search when input changes */
-  useEffect(() => {
-    handleSearch(search);
-    console.log("search: ", search);
-  }, [search]);
+//   /** Trigger search when input changes */
+//   useEffect(() => {
+//     handleSearch(search);
+//     console.log("search: ", search);
+//   }, [search]);
 
-  /** Handle click on a product */
-  const handleProductClick = (id) => {
-    // navigate(`/products/${id}`);
-    setShowSearch(false);
-    setSearch("");
-    setResults([]);
-  };
+//   /** Handle click on a product */
+//   const handleProductClick = (id) => {
+//     // navigate(`/products/${id}`);
+//     setShowSearch(false);
+//     setSearch("");
+//     setResults([]);
+//   };
 
-  /** Clear search state */
-  const clearSearch = () => {
-    setShowSearch(false);
-    setSearch("");
-    setResults([]);
-    setDropdownVisible(false);
-  };
+//   /** Clear search state */
+//   const clearSearch = () => {
+//     setShowSearch(false);
+//     setSearch("");
+//     setResults([]);
+//     setDropdownVisible(false);
+//   };
 
-  if (!showSearch || !visible) return null;
+//   if (!showSearch || !visible) return null;
 
-  return (
-    <div className="border-t border-gray-400 bg-gray-50 text-center relative">
-      {/* Input */}
-      <div className="inline-flex items-center justify-center border border-gray-400 px-5 py-2 my-5 mx-3 rounded-full w-3/4 sm:w-1/2 relative">
-        <input
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          type="text"
-          className="flex-1 outline-none bg-inherit text-sm"
-          placeholder="Search products..."
-          autoFocus
-        />
-        <img src={search_bar} className="w-4" alt="Search" />
-      </div>
+//   return (
+//     <div className="border-t border-gray-400 bg-gray-50 text-center relative">
+//       {/* Input */}
+//       <div className="inline-flex items-center justify-center border border-gray-400 px-5 py-2 my-5 mx-3 rounded-full w-3/4 sm:w-1/2 relative">
+//         <input
+//           value={search}
+//           onChange={(e) => setSearch(e.target.value)}
+//           type="text"
+//           className="flex-1 outline-none bg-inherit text-sm"
+//           placeholder="Search products..."
+//           autoFocus
+//         />
+//         <img src={search_bar} className="w-4" alt="Search" />
+//       </div>
 
-      {/* Dropdown */}
-      {dropdownVisible && (
-        <div className="absolute left-0 right-0 mx-auto w-3/4 sm:w-1/2 bg-white border border-gray-300 rounded-md shadow-lg max-h-64 overflow-y-auto z-10">
-          {loading ? (
-            <p className="px-4 py-2 text-gray-500 text-sm">Searching...</p>
-          ) : error ? (
-            <p className="px-4 py-2 text-red-500 text-sm">{error}</p>
-          ) : results.length > 0 ? (
-            results.map((item) => (
-              <div
-                key={item._id || item.sku}
-                onClick={() => handleProductClick(item._id || item.sku)}
-                className="flex items-center gap-3 px-4 py-3 hover:bg-gray-100 cursor-pointer border-b last:border-b-0"
-              >
-                <img
-                  src={item.images?.[0] || "/placeholder.png"}
-                  alt={item.name}
-                  className="w-10 h-10 object-cover rounded"
-                />
-                <div>
-                  <p className="font-medium text-sm line-clamp-1">
-                    {item.name}
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    {item.brand} — ${item.price}
-                  </p>
-                </div>
-              </div>
-            ))
-          ) : (
-            <p className="px-4 py-2 text-gray-500 text-sm">No results found</p>
-          )}
-        </div>
-      )}
+//       {/* Dropdown */}
+//       {dropdownVisible && (
+//         <div className="absolute left-0 right-0 mx-auto w-3/4 sm:w-1/2 bg-white border border-gray-300 rounded-md shadow-lg max-h-64 overflow-y-auto z-10">
+//           {loading ? (
+//             <p className="px-4 py-2 text-gray-500 text-sm">Searching...</p>
+//           ) : error ? (
+//             <p className="px-4 py-2 text-red-500 text-sm">{error}</p>
+//           ) : results.length > 0 ? (
+//             results.map((item) => (
+//               <div
+//                 key={item._id || item.sku}
+//                 onClick={() => handleProductClick(item._id || item.sku)}
+//                 className="flex items-center gap-3 px-4 py-3 hover:bg-gray-100 cursor-pointer border-b last:border-b-0"
+//               >
+//                 <img
+//                   src={item.images?.[0] || "/placeholder.png"}
+//                   alt={item.name}
+//                   className="w-10 h-10 object-cover rounded"
+//                 />
+//                 <div>
+//                   <p className="font-medium text-sm line-clamp-1">
+//                     {item.name}
+//                   </p>
+//                   <p className="text-xs text-gray-500">
+//                     {item.brand} — ${item.price}
+//                   </p>
+//                 </div>
+//               </div>
+//             ))
+//           ) : (
+//             <p className="px-4 py-2 text-gray-500 text-sm">No results found</p>
+//           )}
+//         </div>
+//       )}
 
-      {/* Close Button */}
-      <img
-        onClick={clearSearch}
-        src={close}
-        alt="Close Search"
-        className="inline w-4 cursor-pointer mb-2"
-      />
-    </div>
-  );
-};
+//       {/* Close Button */}
+//       <img
+//         onClick={clearSearch}
+//         src={close}
+//         alt="Close Search"
+//         className="inline w-4 cursor-pointer mb-2"
+//       />
+//     </div>
+//   );
+// };
 
-export default SearchBar;
+// export default SearchBar;
 
 // import React, { useContext, useEffect, useState, useCallback } from "react";
 // import { ShopContext } from "../contexts/ShopContext";

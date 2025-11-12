@@ -183,6 +183,7 @@ import cartIcon from "../assets/cart.png";
 import userIcon from "../assets/user.png";
 import menuIcon from "../assets/menu.png";
 import closeIcon from "../assets/close.png";
+import backupUser from "../assets/backupUser.jpg";
 import { ShopContext } from "../contexts/ShopContext";
 
 const Navbar = () => {
@@ -325,7 +326,7 @@ const UserDropdown = ({ user, logout }) => {
       onClick={() => setIsOpen((prev) => !prev)} // click for mobile
     >
       <img
-        src={user?.profileImage || userIcon}
+        src={user?.profileImage ? user.profileImage : backupUser || userIcon}
         alt="User"
         className={`${user ? "w-7 rounded-full" : "w-5"} cursor-pointer`}
       />
