@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../contexts/ShopContext";
 import searchIcon from "../assets/search.png";
 import closeIcon from "../assets/close.png";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import api from "../utils/api";
 
 const SearchBar = () => {
   const { search, setSearch, showSearch, setShowSearch } =
     useContext(ShopContext);
+  const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState([]);
@@ -84,11 +85,13 @@ const SearchBar = () => {
           {results.map((p) => (
             <div
               key={p._id}
-              className="p-2 text-left hover:bg-gray-100 cursor-pointer"
+              className="flex gap-4 items-center p-2 text-left hover:bg-gray-100 cursor-pointer"
               onClick={() => {
-                window.location.href = `/product/${p._id}`;
+                // window.location.href = `/product/${p._id}`;
+                navigate(`/product/${p._id}`);
               }}
             >
+              <img src={p.images?p.images[0]:''} className="w-7" alt="" />
               <div className="font-semibold text-sm">{p.name}</div>
               <div className="text-xs text-gray-500">{p.category}</div>
             </div>
