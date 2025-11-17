@@ -11,7 +11,7 @@ const app = express();
 
 app.use(
   cors({
-    // origin: ["https://ayah-archive-frontend.vercel.app","http://localhost:5173"], // Allow requests from Vite frontend
+    // origin: ["http://localhost:5173"], // Allow requests from Vite frontend
     origin: [
       process.env.FRONTEND_URL1,
       process.env.FRONTEND_URL2,
