@@ -34,28 +34,7 @@ app.use("/api/client", require("./routes/userRoutes"));
 app.use("/api/client", require("./routes/authRoutes"));
 app.use("/api/client", require("./routes/clientRoutes"));
 app.use("/api/client", require("./routes/orderRoutes"));
-// app.get("/api/client/search", async (req, res) => {
-//   console.log("Searching started....", req.query);
-//   // res.status(200).json({ mess: "req received." });
-//   try {
-//     const { q, limit = 10 } = req.query;
-//     if (!q || q.trim() === "") {
-//       return res.json({ products: [] });
-//     }
 
-//     // Use regex search for flexible matching
-//     const products = await Product.find({
-//       name: { $regex: q, $options: "i" },
-//     })
-//       .limit(Number(limit))
-//       .select("name category price imageUrl"); // select only what you need
-//     console.log(products);
-//     res.json({ products });
-//   } catch (err) {
-//     console.error("Search error:", err);
-//     res.status(500).json({ error: "Server error" });
-//   }
-// });
 
 app.use("/api/admin", require("./routes/orderRoutes"));
 app.use("/api/admin/", require("./routes/productRoute"));
