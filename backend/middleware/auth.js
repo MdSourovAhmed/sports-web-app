@@ -46,13 +46,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
-/**
- * Authentication middleware
- * Verifies JWT token and attaches the user object to req.user
- *
- *
- *
- */
 
 const authAdmin = async (req, res, next) => {
   console.log("Admin Authentication starts...");
