@@ -1,23 +1,3 @@
-// const express = require("express");
-// const {
-//   getFilteredProducts,
-//   getLatestProducts,
-//   getBestSellers,
-// } = require("../controllers/clientController"); // Adjust path
-
-// const router = express.Router();
-
-// // General filtered products (for Collection page)
-// router.get("/products", getFilteredProducts);
-
-// // Latest collections (newest products)
-// router.get("/latest", getLatestProducts);
-
-// // Best sellers (badminton-specific)
-// router.get("/bestsellers", getBestSellers);
-
-// module.exports = router;
-
 const express = require("express");
 const {
   relatedProducts,
