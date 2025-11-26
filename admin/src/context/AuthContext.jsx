@@ -5,10 +5,6 @@ const AuthContext = ({ children }) => {
   //   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-  //   const [cartItems, setCartItems] = useState({});
-  //   const [searchQuery, setSearchQuery] = useState("");
-  //   const [search, setSearch] = useState("");
-  //   const [showSearch, setShowSearch] = useState(false);
 
   // ✅ Load current user if token exists
   useEffect(() => {
