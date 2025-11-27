@@ -5,10 +5,7 @@ const ProductCard = ({ item, onDelete, onEdit }) => {
   return (
     <div className="border rounded-lg p-4 bg-white hover:shadow-sm transition flex flex-col gap-2">
       <img
-        src={
-          item.images?.[0] ||
-          "https://via.placeholder.com/100x100?text=No+Image"
-        }
+        src={item.images?.[0]}
         alt={item.name}
         className="w-full h-36 object-cover rounded-md"
       />
