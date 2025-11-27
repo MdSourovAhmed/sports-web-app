@@ -114,7 +114,7 @@ const ProductRow = ({ item, selectedItems, toggleSelect, onDelete, onEdit }) => 
 
       <div className="flex justify-center">
         <img
-          src={item.images?.[0] || "https://via.placeholder.com/60x60?text=No+Image"}
+          src={item.images?.[0]}
           alt={item.name}
           className="w-12 h-12 object-cover rounded-md"
         />
