@@ -49,9 +49,6 @@
 
 
 
-
-
-// src/components/ProductRow.jsx
 import React from "react";
 import { Trash2, Edit2, CheckSquare, Square } from "lucide-react";
 
