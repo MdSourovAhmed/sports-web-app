@@ -71,7 +71,7 @@
 
 // export default LatestCollections;
 
-// LatestCollections.jsx (Updated)
+
 import React, { useState, useEffect } from "react";
 import Title from "./Title";
 import ProductItem from "./ProductItem";
