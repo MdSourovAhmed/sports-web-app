@@ -1,15 +1,3 @@
-// import React from 'react'
-
-// const Cart = () => {
-//   return (
-//     <div>
-
-//     </div>
-//   )
-// }
-
-// export default Cart
-
 // import React, { useContext } from "react";
 // import { useNavigate } from "react-router-dom";
 // import { ShopContext } from "../contexts/ShopContext";
