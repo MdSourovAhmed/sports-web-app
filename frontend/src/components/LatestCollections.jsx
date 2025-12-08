@@ -75,7 +75,7 @@
 import React, { useState, useEffect } from "react";
 import Title from "./Title";
 import ProductItem from "./ProductItem";
-import api from "../utils/api.js"; // Adjust path to your api.js
+import api from "../utils/api.js"; 
 
 const LatestCollections = () => {
   const [products, setProducts] = useState([]);
