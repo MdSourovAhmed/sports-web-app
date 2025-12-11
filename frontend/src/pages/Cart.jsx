@@ -238,7 +238,7 @@ const itemsArray = Object.values(cartItems);
                   </p>
                 </div>
 
-                {/* ✅ Quantity Controls */}
+                {/*  Quantity Controls */}
                 <div className="flex items-center gap-4 mt-4">
                   <div className="flex items-center border rounded-md">
                     <button
@@ -281,7 +281,7 @@ const itemsArray = Object.values(cartItems);
           ))}
         </div>
 
-        {/* ✅ Order Summary */}
+        {/*  Order Summary */}
         <TotalOrder itemsArray={itemsArray} totalAmount={totalAmount} />
       </div>
 
@@ -300,7 +300,7 @@ const itemsArray = Object.values(cartItems);
         </button>
       </div>
 
-      {/* ✅ Toast Animation */}
+      {/*  Toast Animation */}
       <style>
         {`
           @keyframes fadeIn {
