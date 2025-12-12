@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import api from "../utils/api";
-import { toast } from "react-hot-toast"; // make sure react-hot-toast is installed
+import { toast } from "react-hot-toast"; 
 import { useNavigate } from "react-router-dom";
 import { ShopContext } from "../contexts/ShopContext";
 
