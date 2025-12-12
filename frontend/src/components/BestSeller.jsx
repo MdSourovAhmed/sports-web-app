@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Title from "./Title.jsx";
 import ProductItem from "./ProductItem.jsx";
-import api from "../utils/api.js"; // Adjust path to your api.js
+import api from "../utils/api.js"; 
 
 const BestSeller = () => {
   const [products, setProducts] = useState([]);
@@ -17,7 +17,7 @@ const BestSeller = () => {
       const response = await api.get("/bestsellers", {
         params: {
           page,
-          limit: 10, // Adjust as needed
+          limit: 10,
           bestSell: true, // Or 'high-low' for top sellers by price/sales if tracked
         },
       });
