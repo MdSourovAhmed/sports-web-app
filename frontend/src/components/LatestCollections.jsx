@@ -34,12 +34,6 @@
 
 // export default LatestCollections;
 
-// import React from "react";
-// import Title from "./Title";
-// import ProductItem from "./ProductItem";
-
-// import sportsData from "../assets/sportsData.js";
-
 // const LatestCollections = () => {
 //   const Products = sportsData.slice(0, 10);
 
