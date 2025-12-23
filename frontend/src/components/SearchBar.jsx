@@ -106,12 +106,7 @@ const SearchBar = () => {
 
 export default SearchBar;
 
-// import React, { useContext, useEffect, useState } from "react";
-// import { ShopContext } from "../contexts/ShopContext";
-// import search_bar from "../assets/search.png";
-// import close from "../assets/close.png";
-// import { useLocation } from "react-router-dom";
-// import api from "../utils/api";
+
 
 // const SearchBar = () => {
 //   const { search, setSearch, showSearch, setShowSearch } =
