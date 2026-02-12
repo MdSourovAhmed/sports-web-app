@@ -263,7 +263,7 @@ exports.getAllOrders = async (req, res) => {
   }
 };
 
-// ✅ Get logged-in user's orders
+// Get logged-in user's orders
 exports.getUserOrders = async (req, res) => {
   try {
     const userId = req.user._id; // ensure `req.user` is set by auth middleware
@@ -280,7 +280,7 @@ exports.getUserOrders = async (req, res) => {
   }
 };
 
-// ✅ Update order delivery info (user)
+// Update order delivery info (user)
 exports.updateOrderInfo = async (req, res) => {
   console.log("updating OrderInfo for id: ", req.params.orderId);
   try {
@@ -318,7 +318,7 @@ exports.updateOrderInfo = async (req, res) => {
   }
 };
 
-// ✅ Update order status (admin)
+//  Update order status (admin)
 exports.updateOrderStatus = async (req, res) => {
   console.log("updating Order status for id: ", req.params.orderId);
   try {
