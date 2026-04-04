@@ -1,0 +1,181 @@
+version: "3.9"
+
+services:
+
+  # ─────────────────────────────────────────
+  # Infrastructure
+  # ─────────────────────────────────────────
+
+  rabbitmq:
+    image: rabbitmq:3.12-management-alpine
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"       # AMQP
+      - "15672:15672"     # Management UI → http://localhost:15672
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - sports-net
+
+  mongo:
+    image: mongo:7.0
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - sports-net
+
+  # ─────────────────────────────────────────
+  # Application services
+  # ─────────────────────────────────────────
+
+  order-service:
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile
+    container_name: order-service
+    restart: unless-stopped
+    ports:
+      - "9001:9001"
+    environment:
+      PORT: 9001
+      MONGO_URI: mongodb://mongo:27017/sports-store-orders
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
+    networks:
+      - sports-net
+
+  product-service:
+    build:
+      context: ./product-service
+      dockerfile: Dockerfile
+    container_name: product-service
+    restart: unless-stopped
+    ports:
+      - "9002:9002"
+    environment:
+      PORT: 9002
+      MONGO_URI: mongodb://mongo:27017/sports-store-products
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
+      LOW_STOCK_THRESHOLD: 5
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
+    networks:
+      - sports-net
+
+  inventory-service:
+    build:
+      context: ./inventory-service
+      dockerfile: Dockerfile
+    container_name: inventory-service
+    restart: unless-stopped
+    environment:
+      MONGO_URI: mongodb://mongo:27017/sports-store-inventory
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
+      LOW_STOCK_THRESHOLD: 5
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
+    networks:
+      - sports-net
+
+  notification-service:
+    build:
+      context: ./notification-service
+      dockerfile: Dockerfile
+    container_name: notification-service
+    restart: unless-stopped
+    environment:
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
+      SMTP_HOST: ${SMTP_HOST:-smtp.gmail.com}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASS: ${SMTP_PASS}
+      MAIL_FROM_NAME: Sports Store
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - sports-net
+
+  logger-service:
+    build:
+      context: ./logger-service
+      dockerfile: Dockerfile
+    container_name: logger-service
+    restart: unless-stopped
+    environment:
+      MONGO_URI: mongodb://mongo:27017/sports-store-logs
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
+      LOG_LEVEL: info
+    volumes:
+      - logs_data:/var/log/sports-store
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
+    networks:
+      - sports-net
+
+  scheduler-service:
+    build:
+      context: ./scheduler-service
+      dockerfile: Dockerfile
+    container_name: scheduler-service
+    restart: unless-stopped
+    ports:
+      - "9005:9005"
+    environment:
+      PORT: 9005
+      # Shares the same DB as logger-service to query event_logs
+      MONGO_URI: mongodb://mongo:27017/sports-store-logs
+      SMTP_HOST: ${SMTP_HOST:-smtp.gmail.com}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASS: ${SMTP_PASS}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      DEFAULT_REPORT_INTERVAL: ${DEFAULT_REPORT_INTERVAL:-monthly}
+    depends_on:
+      mongo:
+        condition: service_healthy
+    networks:
+      - sports-net
+
+# ─────────────────────────────────────────
+# Volumes & network
+# ─────────────────────────────────────────
+
+volumes:
+  rabbitmq_data:
+  mongo_data:
+  logs_data:
+
+networks:
+  sports-net:
+    driver: bridge
